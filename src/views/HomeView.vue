@@ -1,7 +1,9 @@
 <template>
-  <div class="home body" style="height: 1000px;">
-    <p>sss</p>
-  </div>
+  <b-container fluid>
+    <div class="box container">
+
+    </div>
+  </b-container>
 </template>
 
 <script>
@@ -15,4 +17,7 @@ export default {
 </script>
 
 <style>
+  .box {
+    height: 78vh;
+  }
 </style>
