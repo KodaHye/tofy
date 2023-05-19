@@ -2,22 +2,27 @@
   <div id="app">
     <!--header-->
     <the-header></the-header>
-    <div style="background-color: ">
-      <router-view></router-view>
+    <div>
+      <router-view class="router-view"></router-view>
     </div>
-
     <!--footer-->
+    <the-footer></the-footer>
   </div>
 </template>
-
 <script>
 import TheHeader from "@/components/common/header"
+import TheFooter from '@/components/common/TheFooter.vue';
 export default {
   components: {
-    TheHeader,
+    TheHeader, TheFooter
   }
 }
 </script>
 <style>
-
+  .router-view {
+    background-image: url('../src/assets/img/background.avif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
 </style>

@@ -8,7 +8,8 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    style: 'background: url("../../public/main.jpeg") center/cover no-repeat;'
   }
 ]
 
