@@ -2,7 +2,7 @@
   <div id="app">
     <!--header-->
     <the-header></the-header>
-    <div>
+    <div class="section">
       <router-view class="router-view"></router-view>
     </div>
     <!--footer-->
@@ -19,8 +19,11 @@ export default {
 }
 </script>
 <style>
+
+
   .router-view {
-    background-image: url('../src/assets/img/background.avif');
+    background-image: url('/public/unicorn.jpeg');
+    /* background-image: url('/src/assets/img/background.jpg'); */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

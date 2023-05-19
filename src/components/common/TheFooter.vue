@@ -20,12 +20,12 @@ export default {
 
 <style>
     .footer {
+        /* background-image: url('/public/unicorn.jpeg'); */
         width: 100%;
-        border-top: solid;
         height: 110px;
         bottom: 0px;
         position: absolute;
-        border-top: 1px solid;
+        border-top: 1px solid aliceblue;
         padding-top: 15px;
         font-size: 11px;
     }
@@ -34,6 +34,7 @@ export default {
         display: inline-block;
         margin: 0 20px 10px 20px;
         font-size: 11px;
+        text-decoration-line: none;
     }
 
     .footer a:visited {
