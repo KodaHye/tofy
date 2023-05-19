@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home body" style="height: 10000px; width: 100%">
     
   </div>
 </template>
@@ -13,3 +13,11 @@ export default {
   }
 }
 </script>
+
+<style>
+  .body {
+    background-image: url('../../src/assets/img/background.avif');
+    background-repeat : no-repeat;
+    background-size : cover;
+  }
+</style>
