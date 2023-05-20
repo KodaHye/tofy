@@ -14,7 +14,7 @@
 
 <script>
 
-import http from "@/api/http";
+// import http from "@/api/http";
 
 export default {
     name: 'FreeBoardListItem',
@@ -22,14 +22,14 @@ export default {
         freeboard: Object,
     },
     created() {
-        http.get(`/freeboard/${this.$route.params.boardno}`).then(({ data }) => {
-            this.board = data
-        })
+        // http.get(`/freeboard/${this.$route.params.boardno}`).then(({ data }) => {
+        //     this.board = data
+        // })
 
-        http.get(`/freeboard/${this.$route.params.boardno}/comment`).then(({ data }) => {
-            console.log(data)
-            this.comments = data;
-        })
+        // http.get(`/freeboard/${this.$route.params.boardno}/comment`).then(({ data }) => {
+        //     console.log(data)
+        //     this.comments = data;
+        // })
     }
 };
 </script>
