@@ -1,12 +1,13 @@
 <template>
-    <div>
+    <b-container fluid class="worldcup-box">
         <h1>여행지 이상형 월드컵</h1>
         <div v-if="isLoading">
             Loading...
         </div>
-        <div v-else>
-            <div v-if="currentRound === 1">
-                <h2>16 강</h2>
+        <b-row v-else>
+            <b-row v-if="currentRound === 1">
+                <b-col><h2>16 강</h2></b-col>
+                <div class="w-100"></div>
                 <div v-for="match in matches" :key="match.id" class="match" v-show="match.id === currentMatchId">
                     <div class="destination">{{ match.destination1.name }}</div>
                     <button @click="selectDestination(match, match.destination1, 0)">Choose</button>
@@ -14,7 +15,7 @@
                     <div class="destination">{{ match.destination2.name }}</div>
                     <button @click="selectDestination(match, match.destination2, 0)">Choose</button>
                 </div>
-            </div>
+            </b-row>
             <div v-else-if="currentRound === 2">
                 <h2>8 강</h2>
                 <div v-for="match in matches" :key="match.id" class="match" v-show="match.id === currentMatchId">
@@ -51,8 +52,8 @@
                     <p>축하합니다! {{ winner.name }}을(를) 고르셨습니다!</p>
                 </div>
             </div>
-        </div>
-    </div>
+        </b-row>
+    </b-container>
 </template>
   
 <script>
@@ -162,6 +163,9 @@ export default {
 </script>
   
 <style>
+.worldcup-box {
+    /* margin-top: 100px; */
+}
 .match {
     display: flex;
     align-items: center;

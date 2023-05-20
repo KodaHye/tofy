@@ -1,5 +1,5 @@
 <template>
-    <b-container fluid class="container-box">
+    <b-container fluid class="box">
       <b-container fluid class="square">
         <b-row class="text-center" style="height: 10%;">
           <b-col align-self="center" style="font-size: 30px;">tofy</b-col>

@@ -10,7 +10,7 @@
 				<b-navbar-nav>
 					<b-nav-item href="#" @click="$router.push('/attraction')">지역별여행지</b-nav-item>
 					<b-nav-item href="#" @click="$router.push('/plan')">여행계획세우기</b-nav-item>
-					<b-nav-item href="#" @click="$router.push('/attraction')">여행지월드컵</b-nav-item>
+					<b-nav-item href="#" @click="$router.push('/worldcup')">여행지월드컵</b-nav-item>
 					<b-nav-item href="#" @click="$router.push('/freeboard')">자유게시판</b-nav-item>
 					<b-nav-item href="#" @click="$router.push('/attraction')">공지사항</b-nav-item>
 				</b-navbar-nav>
