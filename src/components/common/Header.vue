@@ -58,7 +58,6 @@ export default {
 </script>
 
 <style scoped>
-
 a {
     color: #86A0B1 !important;
 }
@@ -67,7 +66,5 @@ span {
 	text-decoration: none;
 	color: #86A0B1 !important;
 }
-
-
 
 </style>

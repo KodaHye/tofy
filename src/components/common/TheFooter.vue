@@ -1,5 +1,5 @@
 <template>
-    <b-container fluid class="footer">
+    <b-container fluid class="footer" style="background-color: white;">
         <nav>
             <a href="#">GitHub</a> |
             <a href="#">Blog</a>
