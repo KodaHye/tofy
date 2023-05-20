@@ -24,7 +24,7 @@ export default {
         width: 100%;
         height: 110px;
         bottom: 0px;
-        /* position: absolute; */
+        position: absolute;
         border-top: 1px solid aliceblue;
         padding-top: 15px;
         font-size: 11px;
