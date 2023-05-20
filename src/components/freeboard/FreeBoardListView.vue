@@ -84,18 +84,4 @@ export default {
 </script>
 
 <style scoped>
-.box {
-    height: 973px;
-    margin: 51px 0 0;
-    padding: 67px 0 0;
-    opacity: 0.8;
-}
-
-.content {
-    height: 779px;
-    margin: 0 32px 41px 33px;
-    padding: 30px 18px 422px 43px;
-    border-radius: 20px;
-    background-color: #fff;
-}
 </style>
