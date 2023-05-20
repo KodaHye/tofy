@@ -16,9 +16,19 @@ const routes = [
     component: () => import("@/views/loginView.vue"),
   },
   {
+    path: '/join',
+    name: 'join',
+    component: () => import("@/views/JoinView.vue")
+  },
+  {
     path: '/freeboard',
     name: 'freeboard',
     component: () => import("@/views/FreeBoardView"),
+  },
+  {
+    path: '/worldcup',
+    name: 'worldcup',
+    component: () => import("@/views/AttractionWorldCupView.vue"),
   }
 
 ]
