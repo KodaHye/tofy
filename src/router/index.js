@@ -21,16 +21,41 @@ const routes = [
     component: () => import("@/views/JoinView.vue")
   },
   {
-    path: '/freeboard',
-    name: 'freeboard',
-    component: () => import("@/views/FreeBoardView"),
-  },
-  {
     path: '/worldcup',
     name: 'worldcup',
     component: () => import("@/views/AttractionWorldCupView.vue"),
-  }
-
+  },
+  {
+    path: '/freeboard',
+    name: 'freeboard',
+    redirect: "/freeboard/list",
+    component: () => import("@/views/FreeBoardView"),
+    children: [
+      {
+        path: 'list',
+        name: 'freeboardlist',
+        component: () => import("@/components/freeboard/FreeBoardListView"),
+      },
+      {
+        path: 'write',
+        name: 'freeboardwrite',
+        component: () => import("@/components/freeboard/FreeBoardWriteView"),
+      }
+    ]
+  }, 
+  {
+    path: '/plan',
+    name: 'plan',
+    redirect: "/plan/list",
+    component: () => import("@/views/PlanView"),
+    children: [
+      {
+        path: 'list',
+        name: 'freeboardlist',
+        component: () => import("@/components/plan/PlanListView"),
+      },
+    ]
+  }, 
 ]
 
 const router = new VueRouter({
