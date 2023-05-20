@@ -1,12 +1,13 @@
 <template>
-    <div>
-        <h1>여행지 이상형 월드컵</h1>
+    <div class="box">
+        <div class="worldcup-content">
+            <h2>여행지 이상형 월드컵</h2>
         <div v-if="isLoading">
             Loading...
         </div>
         <div v-else>
             <div v-if="currentRound === 1">
-                <h2>16 강</h2>
+                <h3>16 강</h3>
                 <div v-for="match in matches" :key="match.id" class="match" v-show="match.id === currentMatchId">
                     <div class="destination">{{ match.destination1.name }}</div>
                     <button @click="selectDestination(match, match.destination1, 0)">Choose</button>
@@ -52,6 +53,8 @@
                 </div>
             </div>
         </div>
+        </div>
+
     </div>
 </template>
   
@@ -176,5 +179,13 @@ export default {
 
 .vs {
     margin: 0 10px;
+}
+
+.worldcup-content {
+    min-height: 80;
+    margin: 0 auto;
+    flex-grow: 1;
+    border-radius: 20px;
+    max-width: 80vw;
 }
 </style>
