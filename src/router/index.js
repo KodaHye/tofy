@@ -49,6 +49,24 @@ const routes = [
     ]
   }, 
   {
+    path: '/notice',
+    name: 'notice',
+    redirect: "/notice/list",
+    component: () => import("@/views/NoticeView"),
+    children: [
+      {
+        path: 'list',
+        name: 'noticelist',
+        component: () => import("@/components/notice/NoticeListView"),
+      },
+      {
+        path: 'write',
+        name: 'noticewrite',
+        component: () => import("@/components/notice/NoticeWriteView"),
+      }
+    ]
+  }, 
+  {
     path: '/plan',
     name: 'plan',
     redirect: "/plan/list",
@@ -56,8 +74,13 @@ const routes = [
     children: [
       {
         path: 'list',
-        name: 'freeboardlist',
+        name: 'planlist',
         component: () => import("@/components/plan/PlanListView"),
+      },
+      {
+        path: 'write',
+        name: 'planwrite',
+        component: () => import("@/components/plan/PlanWriteView"),
       },
     ]
   }, 
