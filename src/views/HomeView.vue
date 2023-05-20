@@ -1,8 +1,8 @@
 <template>
   <b-container fluid>
-    <div class="box container">
-
-    </div>
+    <b-container class="box">d</b-container>
+    <b-container class="box">d</b-container>
+    <b-container class="box">d</b-container>
   </b-container>
 </template>
 
@@ -18,6 +18,6 @@ export default {
 
 <style>
   .box {
-    height: 78vh;
+    height: 100vh;
   }
 </style>

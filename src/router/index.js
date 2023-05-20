@@ -9,7 +9,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView,
-    style: 'background: url("../../public/main.jpeg") center/cover no-repeat;'
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import("@/views/loginView.vue"),
   }
 ]
 
