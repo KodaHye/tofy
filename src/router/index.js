@@ -21,6 +21,11 @@ const routes = [
     component: () => import("@/views/JoinView.vue")
   },
   {
+    path: '/mypage',
+    name: 'myPage',
+    component: () => import("@/views/MypageView.vue")
+  },
+  {
     path: '/freeboard',
     name: 'freeboard',
     component: () => import("@/views/FreeBoardView"),
