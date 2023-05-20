@@ -3,7 +3,7 @@
         <div class="content">
             <div style="margin: 20px 0px;">
                 <div>
-                    <h1>자유게시판 입니다.</h1>
+                    <h2>자유게시판 입니다.</h2>
                 </div>
                 <div><span>자유롭게 글을 작성해주세요.</span></div>
 
