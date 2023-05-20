@@ -3,15 +3,15 @@
         <div class="content">
             <div style="margin: 20px 0px;">
                 <div>
-                    <h1>여행계획 게시판 입니다.</h1>
+                    <h3>여행계획 게시판 입니다.</h3>
                 </div>
-                <div><span>나만의 여행계획을 만들어주세요.</span></div>
+                <div><span>자신이 만든 여행계획을 공유해요.</span></div>
 
             </div>
             <div class="">
                 <div class="row align-self-center mb-2">
                     <div class="col-md-2 text-start">
-                        <b-button variant="outline-primary" @click="$router.push({ name: 'freeboardwrite' })">글쓰기</b-button>
+                        <b-button variant="outline-primary" @click="$router.push({ name: 'planwrite' })">계획 만들기</b-button>
                     </div>
                     <div class="col-md-3"></div>
                     <div class="col-md-7">
