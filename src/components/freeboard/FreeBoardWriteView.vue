@@ -18,11 +18,14 @@
 				<label for="content" class="form-label">내용 : </label>
 				<textarea class="form-control" id="content" name="content" rows="7" placeholder="내용 입력..." v-model="content"></textarea>
 			</div>
+            
 			<div class="col-auto text-center">
 				<button type="button" id="btn-register"
 					class="btn btn-outline-primary mb-3" @click="writeBoard">글작성</button>
 				<button type="reset" class="btn btn-outline-danger mb-3">초기화</button>
 			</div>
+
+
         </div>
     </div>
 </template>

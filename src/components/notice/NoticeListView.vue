@@ -3,9 +3,9 @@
         <div class="content">
             <div style="margin: 20px 0px;">
                 <div>
-                    <h2>자유게시판 입니다.</h2>
+                    <h2>공지사항 게시판입니다.</h2>
                 </div>
-                <div><span>자유롭게 글을 작성해주세요.</span></div>
+                <div><span>공지사항을 확인해주세요.</span></div>
 
             </div>
             <div class="">
@@ -66,14 +66,11 @@
 
 <script>
 
-import FreeBoardListItem from "@/components/freeboard/FreeBoardListItemView";
-
 export default {
-    name: 'FreeBoardView',
-    components: {FreeBoardListItem},
+    name: 'NoticeView',
+    components: {},
     data() {
         return {
-            freeboardList: Object,
         };
     },
     created() {
