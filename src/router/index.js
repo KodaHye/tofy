@@ -92,4 +92,15 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.path === '/') {
+  // '/' 경로일 때만 fullpage.min.js 파일 동적으로 로드
+  const script = document.createElement('script')
+  script.src = '/fullpage.min.js'
+  document.head.appendChild(script)
+  }
+
+  next()
+  })
+
 export default router
