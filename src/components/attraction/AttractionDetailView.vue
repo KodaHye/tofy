@@ -112,7 +112,7 @@
             </div>
         </div>
     </div>
-</template>s
+</template>
 
 <script>
 import { Carousel, Slide } from 'vue-carousel';

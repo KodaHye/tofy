@@ -1,6 +1,6 @@
 <template>
-    <b-container fluid class="container-box">
-        <b-container fluid class="square">
+    <div class="box">
+        <div class="contentdetail">
             <b-row class="text-center" style="height: 20%;">
                 <b-col align-self="center" style="font-size: 30px;">tofy</b-col>
             </b-row>
@@ -15,13 +15,13 @@
                 <div class="w-100"></div>
                 <b-col><b-form-input placeholder="Enter Password"></b-form-input></b-col>
             </b-row>
-            <b-row class="text-center" style="padding-top: 90px;">
+            <b-row class="text-center" style="padding-top: 50px;">
                 <b-col align-self="center" style="font-size: 20px;">
                     <a class="login-btn" href="#">login</a>
                 </b-col>
             </b-row>
-        </b-container>
-    </b-container>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -31,18 +31,14 @@ export default {
 </script>
 
 <style>
-.container-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.square {
-    width: 40vw;
-    height: 60vh;
-    background-color: white;
-    border-radius: 5%;
+.contentdetail {
+    min-height: 80;
+    flex-grow: 1;
+    margin: 0 auto;
+    max-width: 50vw;
+    padding: 30px 18px 43px;
+    border-radius: 20px;
+    background-color: #fff;
 }
 
 .login-btn {
