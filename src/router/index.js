@@ -28,7 +28,24 @@ const routes = [
   {
     path: '/mypage',
     name: 'myPage',
-    component: () => import("@/views/MypageView.vue")
+    component: () => import("@/views/MypageView.vue"),
+    children: [
+      {
+        path: 'userInfo',
+        name: 'userInfo',
+        component: () => import('@/components/user/mypage/UserInfo')
+      },
+      {
+        path: 'tag',
+        name: 'userTag',
+        component: () => import('@/components/tag/TagItems')
+      },
+      {
+        path: 'worldcupList',
+        name: 'worldcupList',
+        component: () => import('@/components/user/mypage/UserWorldCupWinner')
+      }
+    ]
   },
   {
     path: '/worldcup',

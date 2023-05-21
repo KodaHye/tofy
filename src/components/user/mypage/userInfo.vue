@@ -1,9 +1,6 @@
 <template>
     <b-container>
         <b-row>
-            <b-col align-self="center" style="text-align: center; font-size: 25px;">개인정보</b-col>
-            <div class="w-100"></div>
-            <!--사용자명 form-->
             <b-col>
                 <b-row>
                     <b-col class="text-item">사용자명</b-col>
@@ -42,7 +39,7 @@
                     </b-col>
                 </b-row>
             </b-col>
-            <div class="w-100" style="margin-top: 70px;"></div>
+            <div class="w-100" style="margin-top: 30px;"></div>
             <!--수정/탈퇴 버튼-->
             <b-col align-self="center" style="text-align: center;">
                 <a href="#" class="event-btn">수정</a>

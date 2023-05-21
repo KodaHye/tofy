@@ -46,14 +46,14 @@
       <b-row>
         <b-col style="padding-left: 20px; margin-bottom: 5px;">이메일</b-col>
         <div class="w-100"></div>
-        <b-col>
-          <b-form-input placeholder="e-mail" style="width: 230px"></b-form-input>
+        <b-col cols="5" style="padding: 0;">
+          <b-form-input placeholder="e-mail"></b-form-input>
         </b-col>
-        <b-col>
-          <b-form-input readonly style="width: 50px;">@</b-form-input>
+        <b-col cols="1" style="padding: 0;">
+          <b-form-input readonly value="@">@</b-form-input>
         </b-col>
-        <b-col>
-          <b-form-select :options="options" style="width: 205px;"></b-form-select>
+        <b-col cols="6" style="padding: 0;">
+          <b-form-select :options="options"></b-form-select>
         </b-col>
       </b-row>
       <b-row style="height: 40px;"></b-row>

@@ -3,7 +3,7 @@
 		<b-navbar type="" variant="">
 			<b-navbar-nav>
 				<b-nav-item href="#index" id="enjoyTrip" @click="$router.push('/')">
-					<span id="enjoyTrip" class="navbar-brand fs-3">Enjoy Trip</span></b-nav-item>
+					<span id="enjoyTrip" class="navbar-brand fs-3" style="font-size: 35px;">tofy</span></b-nav-item>
 			</b-navbar-nav>
 
 			<b-collapse id="nav-collapse" is-nav>

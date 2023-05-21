@@ -2,9 +2,7 @@
   <div id="app">
     <nav>
       <the-header></the-header>
-      <div class="section">
         <router-view class="router-view"></router-view>
-      </div>
       <the-footer v-if="$route.name !== 'home'"></the-footer>
     </nav>
   </div>
