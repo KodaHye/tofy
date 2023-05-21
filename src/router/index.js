@@ -21,6 +21,11 @@ const routes = [
     component: () => import("@/views/JoinView.vue")
   },
   {
+    path: '/selectTag',
+    name: 'selectTag',
+    component: () => import("@/views/JoinSelectTagView")
+  },
+  {
     path: '/mypage',
     name: 'myPage',
     component: () => import("@/views/MypageView.vue")
