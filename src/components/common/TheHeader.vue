@@ -21,15 +21,10 @@
 							<span>회원관리</span>								
 						</template>
 						<!-- <b-dropdown-item href="#" @click="signin" v-b-modal.signin>회원가입</b-dropdown-item> -->
-						<b-dropdown-item href="#" v-b-modal.signin>회원가입</b-dropdown-item>
-						<b-dropdown-item href="#" v-b-modal.login>로그인</b-dropdown-item>
+						<b-dropdown-item href="#" @click="$router.push('/join')">회원가입</b-dropdown-item>
+						<b-dropdown-item href="#" @click="$router.push('/login')">로그인</b-dropdown-item>
 					</b-nav-item-dropdown>
 					
-					<!-- 회원가입 모달창 -->
-					<user-signin-item></user-signin-item>
-
-					<!-- 로그인 모달창 -->
-					<user-login-item></user-login-item>
 				</b-navbar-nav>
 			</b-collapse>
 		</b-navbar>
@@ -38,14 +33,9 @@
 
 <script>
 
-import UserSigninItem from "@/components/user/item/UserSigninItem.vue"
-import UserLoginItem from "@/components/user/item/UserLoginItem.vue";
-
 export default {
 	name: 'TheHeader',
 	components: {
-		UserSigninItem,
-		UserLoginItem,
 	},
 	data() {
 		return {

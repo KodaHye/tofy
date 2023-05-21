@@ -84,6 +84,24 @@ const routes = [
       },
     ]
   }, 
+  {
+    path: '/attraction',
+    name: 'attraction',
+    redirect: "/attraction/search",
+    component: () => import("@/views/AttractionView"),
+    children: [
+      {
+        path: 'search',
+        name: 'attractionsearch',
+        component: () => import("@/components/attraction/AttractionSearchView"),
+      },
+      {
+        path: 'detail',
+        name: 'attractiondetail',
+        component: () => import("@/components/attraction/AttractionDetailView"),
+      },
+    ]
+  }, 
 ]
 
 const router = new VueRouter({
