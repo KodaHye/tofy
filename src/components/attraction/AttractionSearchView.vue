@@ -188,8 +188,12 @@ export default {
                 type: this.type
             }
 
-            axios.post(`http://localhost/trip/attraction/map`, attractionInfo)
+            //확인
+            console.log(attractionInfo);
+
+            axios.post(`http://localhost:9999/tofy/attraction/map`, attractionInfo)
                 .then(res => {
+                    console.log("결과 : " + res[0]);
                     this.makeList(res.data);
                     console.log(res.data)
                 })
