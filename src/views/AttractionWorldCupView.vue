@@ -12,12 +12,12 @@
                         <!--매치 start-->
                         <b-row>
                             <!--왼쪽 여행지 start-->
-                            <b-col :style="{ 'background-image': `url(${match.destination1.firstImage})` }" 
+                            <b-col :style="{ 'background-image': `url(${match.destination1.firstImage === '' ? '/public/no_image.jpg' : match.destination1.firstImage})` }" 
                                     class="worldcup-content-card"
                                     @click="selectDestination(match, match.destination1, 0)"
                                     >
                                 <div class="destination">{{ match.destination1.title }}</div>
-                                <div>{{ match.destination1.addr }}</div>
+                                <div class="destination">{{ match.destination1.addr }}</div>
                             </b-col>
                             <!--왼쪽 여행지 end-->
                             <b-col cols="3" style="text-align: center; font-size: 30px; font-weight: bolder;">vs</b-col>
@@ -27,7 +27,7 @@
                                     @click="selectDestination(match, match.destination2, 0)"
                                     >
                                 <div class="destination">{{ match.destination2.title }}</div>
-                                <div>{{ match.destination2.addr }}</div>
+                                <div class="destination">{{ match.destination2.addr }}</div>
                             </b-col>
                             <!--오른쪽 여행지 end-->
                         </b-row>
@@ -45,7 +45,7 @@
                                     @click="selectDestination(match, match.destination1, 1)"
                                     >
                                 <div class="destination">{{ match.destination1.title }}</div>
-                                <div>{{ match.destination1.addr }}</div>
+                                <div class="destination">{{ match.destination1.addr }}</div>
                             </b-col>
                             <!--왼쪽 여행지 end-->
                             <b-col cols="3" style="text-align: center; font-size: 30px; font-weight: bolder;">vs</b-col>
@@ -55,7 +55,7 @@
                                     @click="selectDestination(match, match.destination2, 1)"
                                     >
                                 <div class="destination">{{ match.destination2.title }}</div>
-                                <div>{{ match.destination2.addr }}</div>
+                                <div class="destination">{{ match.destination2.addr }}</div>
                             </b-col>
                             <!--오른쪽 여행지 end-->
                         </b-row>
@@ -83,7 +83,7 @@
                                     @click="selectDestination(match, match.destination2, 2)"
                                     >
                                 <div class="destination">{{ match.destination2.title }}</div>
-                                <div>{{ match.destination2.addr }}</div>
+                                <div class="destination">{{ match.destination2.addr }}</div>
                             </b-col>
                             <!--오른쪽 여행지 end-->
                         </b-row>
@@ -101,7 +101,7 @@
                                     @click="selectDestination(match, match.destination1, 3)"
                                     >
                                 <div class="destination">{{ match.destination1.title }}</div>
-                                <div>{{ match.destination1.addr }}</div>
+                                <div class="destination">{{ match.destination1.addr }}</div>
                             </b-col>
                             <!--왼쪽 여행지 end-->
                             <b-col cols="3" style="text-align: center; font-size: 30px; font-weight: bolder;">vs</b-col>
@@ -111,7 +111,7 @@
                                     @click="selectDestination(match, match.destination2, 3)"
                                     >
                                 <div class="destination">{{ match.destination2.title }}</div>
-                                <div>{{ match.destination2.addr }}</div>
+                                <div class="destination">{{ match.destination2.addr }}</div>
                             </b-col>
                             <!--오른쪽 여행지 end-->
                         </b-row>
@@ -126,8 +126,8 @@
                             :style="{ 'background-image': `url(${winner.firstImage})` }"
                             style="margin: auto;"
                         >
-                            <div>{{ winner.title }}</div>
-                            <div>{{ winner.addr }}</div>
+                            <div class="destination">{{ winner.title }}</div>
+                            <div class="destination">{{ winner.addr }}</div>
                         </div>
                     </div>
                 </div>
@@ -245,6 +245,8 @@ export default {
 .destination {
     font-size: 20px;
     margin-right: 10px;
+    margin-top: 20px;
+    color: black
 }
 
 .vs {
@@ -268,6 +270,10 @@ export default {
     background-size: cover;
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
     animation: move 1.0s alternate;
+}
+
+.worldcup-content-card:hover {
+    transform: scale3d(1.2, 1.1, 1.3)
 }
 
 @keyframes move {
