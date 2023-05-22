@@ -18,19 +18,75 @@
     <!--로그인 시 사용자 기반 추천 여행지 보이기 start-->
     <div class="section">
       <!--여기에 캐러셀 구현 예정-->
-      
+      <div style="margin-right: 50px; margin-left: 50px;" data-aos="fade-up">
+        <carousel ref="carousel" :perPage="5" :navigation-enabled="true"
+          navigationPrevLabel='<i class="fas fa-angle-left"></i>'
+          navigationNextLabel='<i class="fa fa-angle-right" aria-hidden="true"></i>'>
+          <slide v-for="card in cards" :key="card.id">
+            <!-- 카드 내용을 추가하세요 -->
+            <div class="card">
+              <img :src="card.image" alt="카드 이미지" />
+              <h3>{{ card.title }}</h3>
+              <p>{{ card.description }}</p>
+            </div>
+          </slide>
+        </carousel>
+      </div>
     </div>
     <!--로그인 시 사용자 추천 여행지 보이기 start-->
   </div>
 </template>
 
 <script>
-// import { Carousel, Slide } from 'vue-carousel';
+import { Carousel, Slide } from 'vue-carousel';
 
 export default {
   components: {
-    // Carousel,
-    // Slide,
+    Carousel,
+    Slide,
+  },
+  data() {
+    return {
+      cards: [
+        {
+          id: 1,
+          image: '이미지 URL',
+          title: '여행지 이름',
+          description: '간단한 여행지 설명',
+        },
+        {
+          id: 2,
+          image: '이미지 URL',
+          title: '여행지 이름',
+          description: '간단한 여행지 설명',
+        },
+        {
+          id: 3,
+          image: '이미지 URL',
+          title: '여행지 이름',
+          description: '간단한 여행지 설명',
+        },
+        {
+          id: 4,
+          image: '이미지 URL',
+          title: '여행지 이름',
+          description: '간단한 여행지 설명',
+        },
+        {
+          id: 5,
+          image: '이미지 URL',
+          title: '여행지 이름',
+          description: '간단한 여행지 설명',
+        },
+        {
+          id: 6,
+          image: '이미지 URL',
+          title: '여행지 이름',
+          description: '간단한 여행지 설명',
+        },
+        // 다른 카드들도 추가하세요
+      ],
+    }
   },
   created() {
 
@@ -41,7 +97,32 @@ export default {
 };
 </script>
 
+<style>
+.VueCarousel-pagination {
+  display: none !important;
+}
+
+.VueCarousel-navigation-button {
+  font-weight: bolder !important;
+  padding-top: 0px !important;
+  height: 50px !important;
+  font-size: 25pt !important;
+  color: gray !important;
+  opacity: 25% !important;
+}
+</style>
+
 <style scoped>
+.card {
+  /* 카드 스타일을 설정하세요 */
+  margin: 5px;
+  padding: 10px;
+}
+
+.card>p {
+  margin: 0px;
+}
+
 .section {
   height: 82vh;
   display: flex;
