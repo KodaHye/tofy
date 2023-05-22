@@ -4,11 +4,16 @@ import router from './router'
 import store from './store'
 import "@/api/lib/vueBootstrap.js";
 import "@/css/index.css";
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 Vue.config.productionTip = false
 
 new Vue({
   router,
   store,
+  created() {
+    AOS.init();
+  },
   render: h => h(App)
 }).$mount('#app')
