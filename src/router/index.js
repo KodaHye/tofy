@@ -133,7 +133,7 @@ const routes = [
         component: () => import("@/components/attraction/AttractionSearchView"),
       },
       {
-        path: 'detail',
+        path: 'detail/:attrno',
         name: 'attractionDetail',
         component: () => import("@/components/attraction/AttractionDetailView"),
       },
