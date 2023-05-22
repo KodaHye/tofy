@@ -1,20 +1,18 @@
 <template>
     <tr class="text-center">
-        <th scope="row">{{ board.articleNo }}</th>
+        <th scope="row">{{ freeboard.freeBoardNo }}</th>
         <td class="text-start">
-            <router-link :to="{ name: 'boardDetail', params: { boardno: board.articleNo } }">
-                {{ board.subject }}
+            <router-link :to="{ name: 'freeboardDetail', params: { boardno: freeboard.freeBoardNo } }">
+                {{ freeboard.freeBoardTitle }}
             </router-link>
         </td>
-        <td>{{ board.userId }}</td>
-        <td>{{ board.hit }}</td>
-        <td>{{ board.registerTime }}</td>
+        <td>{{ freeboard.userNo }}</td>
+        <td>{{ freeboard.freeBoardHit }}</td>
+        <td>{{ freeboard.freeBoardCreate }}</td>
     </tr>
 </template>
 
 <script>
-
-// import http from "@/api/http";
 
 export default {
     name: 'FreeBoardListItem',

@@ -1,14 +1,9 @@
-import axios from "axios";
+// import { apiInstance } from "./index.js";
 
-// local vue api axios instance
-function apiInstance() {
-  const instance = axios.create({
-    baseURL: process.env.VUE_APP_API_BASE_URL,
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-  });
-  return instance;
-}
+// const api = apiInstance();
 
-export { apiInstance};
+// function listFreeBaord(param, success, fail) {
+//   api.get(`/freeboard`).then(success).catch(fail);
+// }
+
+// export { listFreeBaord };

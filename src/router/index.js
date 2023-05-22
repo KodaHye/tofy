@@ -65,13 +65,28 @@ const routes = [
     children: [
       {
         path: 'list',
-        name: 'freeboardlist',
+        name: 'freeboardList',
         component: () => import("@/components/freeboard/FreeBoardListView"),
       },
       {
         path: 'write',
-        name: 'freeboardwrite',
+        name: 'freeboardWrite',
         component: () => import("@/components/freeboard/FreeBoardWriteView"),
+      },
+      {
+        path: 'modify/:boardno',
+        name: 'freeboardModify',
+        component: () => import("@/components/freeboard/FreeBoardModifyView"),
+      },
+      {
+        path: 'detail/:boardno',
+        name: 'freeboardDetail',
+        component: () => import("@/components/freeboard/FreeBoardDetailView"),
+      },
+      {
+        path: 'delete/:boardno',
+        name: 'freeboardDelete',
+        component: () => import("@/components/freeboard/FreeBoardDeleteView"),
       }
     ]
   }, 
@@ -83,12 +98,12 @@ const routes = [
     children: [
       {
         path: 'list',
-        name: 'noticelist',
+        name: 'noticeList',
         component: () => import("@/components/notice/NoticeListView"),
       },
       {
         path: 'write',
-        name: 'noticewrite',
+        name: 'noticeWrite',
         component: () => import("@/components/notice/NoticeWriteView"),
       }
     ]
@@ -101,12 +116,12 @@ const routes = [
     children: [
       {
         path: 'list',
-        name: 'planlist',
+        name: 'planList',
         component: () => import("@/components/plan/PlanListView"),
       },
       {
         path: 'write',
-        name: 'planwrite',
+        name: 'planWrite',
         component: () => import("@/components/plan/PlanWriteView"),
       },
     ]
@@ -119,12 +134,12 @@ const routes = [
     children: [
       {
         path: 'search',
-        name: 'attractionsearch',
+        name: 'attractionSearch',
         component: () => import("@/components/attraction/AttractionSearchView"),
       },
       {
-        path: 'detail',
-        name: 'attractiondetail',
+        path: 'detail/:attrno',
+        name: 'attractionDetail',
         component: () => import("@/components/attraction/AttractionDetailView"),
       },
     ]

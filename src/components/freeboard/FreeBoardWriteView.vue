@@ -14,6 +14,7 @@
 					type="text" class="form-control" id="subject" name="subject"
 					placeholder="제목..." v-model="subject"/>
 			</div>
+            
 			<div class="mb-3">
 				<label for="content" class="form-label">내용 : </label>
 				<textarea class="form-control" id="content" name="content" rows="7" placeholder="내용 입력..." v-model="content"></textarea>
