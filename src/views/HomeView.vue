@@ -1,5 +1,6 @@
 <template>
-  <div id="fullpage">
+  <div id="">
+  <!-- <div id="fullpage"> -->
     <!-- 첫번째 Section -->
     <div class="section" style="background-image: url('/main_img/unicorn_1.jpeg'); background-size: 100% 100%;">
       <div class="section-content">

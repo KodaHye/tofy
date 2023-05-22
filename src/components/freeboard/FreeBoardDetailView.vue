@@ -28,7 +28,7 @@
             </div>
 
             <div class="row align-self-center mb-2" style="display: flex; align-items: baseline;">
-                <div class="col-md-5"><span style="color: gray;">총 댓글: X개</span></div>
+                <div class="col-md-5"><span style="color: gray;">총 댓글: {{commentList.length}}개</span></div>
                 <div class="col-md-7">
                     <div class="row" style="float: right;">
                         <div class="row">
