@@ -3,7 +3,7 @@
         <div class="content">
             <div style="margin: 20px 0px;">
                 <div>
-                    <h1>여행계획 게시판 입니다.</h1>
+                    <h1>여행계획 작성 게시판 입니다.</h1>
                 </div>
                 <div><span>나만의 여행계획을 만들어보세요.</span></div>
             </div>
@@ -28,8 +28,8 @@
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-6 col-6">
                     <!-- kakaoMap API  start  -->
-                    <div id="map" style="width: 100%; height: 400px;">
-
+                    <div class="map container">
+                        <div id="map" style="height: 400px"></div>
                     </div>
                     <!-- kakaoMap API  end -->
                 </div>
@@ -93,11 +93,48 @@ export default {
     components: {},
     data() {
         return {
-            message: '',
+            map: null,
+            sidoCode: String,
+            gugunCode: String,
+            type: String,
+            keyword: "",
+            mapContainer: {},
+            mapOption: {},
+            positions: [],
         };
     },
     created() { },
-    methods: {},
+    methods: {
+        loadScript() {
+            const script = document.createElement("script");
+            script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=09ba918a188ed18bf9d1f53d737a194a&libraries=services,clusterer,drawing&autoload=false";
+
+            script.onload = () => window.kakao.maps.load(this.loadMap);
+
+            document.head.appendChild(script); //html => head 안에 스크립트 소스를 추가
+        },
+
+        loadMap() {
+
+            this.mapContainer = document.getElementById("map");
+            this.mapOption = {
+                //지도를 생성할 때 필요한 기본 옵션
+                center: new window.kakao.maps.LatLng(37.500613, 127.036431),
+                level: 5,
+            };
+
+            this.map = new window.kakao.maps.Map(this.mapContainer, this.mapOption);
+        },
+    },
+    mounted() {
+        if (window.kakao && window.kakao.maps) {
+            //카카오 객체가 있고, 카카오 맵을 그릴 준비가 되어 있다면 맵 실행
+            this.loadMap();
+        } else {
+            //없다면 카카오 스크립트 추가 후 맵 실행
+            this.loadScript();
+        }
+    }
 };
 </script>
 

@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'NanumBarunGothic';
-    src: url('../../public/fonts/MaruBuri-SemiBold.ttf') format('truetype');
+    src: url('../../public/fonts/apple.ttf') format('truetype');
     font-weight: 300;
   }
   
@@ -26,7 +26,6 @@
     margin: 51px 0 0;
     padding: 67px 0 0;
     padding-bottom: 10px;
-    opacity: 0.8;
 }
 
 .content {

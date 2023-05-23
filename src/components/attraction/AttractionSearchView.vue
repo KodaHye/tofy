@@ -188,7 +188,7 @@ export default {
                 type: this.type
             }
 
-            axios.post(`http://localhost/trip/attraction/map`, attractionInfo)
+            axios.post(`http://localhost:9999/tofy/attraction/map`, attractionInfo)
                 .then(res => {
                     this.makeList(res.data);
                     console.log(res.data)
