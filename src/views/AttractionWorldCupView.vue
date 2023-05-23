@@ -12,7 +12,7 @@
                         <!--매치 start-->
                         <b-row>
                             <!--왼쪽 여행지 start-->
-                            <b-col :style="{ 'background-image': `url(${match.destination1.firstImage === '' ? '/public/no_image.jpg' : match.destination1.firstImage})` }" 
+                            <b-col :style="{ 'background-image': `url(${match.destination1.firstImage === '' ? require('/public/no_image.jpg') : match.destination1.firstImage})` }" 
                                     class="worldcup-content-card"
                                     @click="selectDestination(match, match.destination1, 0)"
                                     >
@@ -22,7 +22,7 @@
                             <!--왼쪽 여행지 end-->
                             <b-col cols="3" style="text-align: center; font-size: 30px; font-weight: bolder;">vs</b-col>
                             <!--오른쪽 여행지 start-->
-                            <b-col :style="{ 'background-image': `url(${match.destination2.firstImage})` }" 
+                            <b-col :style="{ 'background-image': `url(${match.destination2.firstImage === '' ? require('/public/no_image.jpg') : match.destination2.firstImage})` }" 
                                     class="worldcup-content-card"
                                     @click="selectDestination(match, match.destination2, 0)"
                                     >
@@ -40,7 +40,7 @@
                         <!--매치 start-->
                         <b-row>
                             <!--왼쪽 여행지 start-->
-                            <b-col :style="{ 'background-image': `url(${match.destination1.firstImage})` }" 
+                            <b-col :style="{ 'background-image': `url(${match.destination1.firstImage === '' ? require('/public/no_image.jpg') : match.destination1.firstImage})` }" 
                                     class="worldcup-content-card"
                                     @click="selectDestination(match, match.destination1, 1)"
                                     >
@@ -50,7 +50,7 @@
                             <!--왼쪽 여행지 end-->
                             <b-col cols="3" style="text-align: center; font-size: 30px; font-weight: bolder;">vs</b-col>
                             <!--오른쪽 여행지 start-->
-                            <b-col :style="{ 'background-image': `url(${match.destination2.firstImage})` }" 
+                            <b-col :style="{ 'background-image': `url(${match.destination2.firstImage === '' ? require('/public/no_image.jpg') : match.destination2.firstImage})` }" 
                                     class="worldcup-content-card"
                                     @click="selectDestination(match, match.destination2, 1)"
                                     >
@@ -68,7 +68,7 @@
                         <!--매치 start-->
                         <b-row>
                             <!--왼쪽 여행지 start-->
-                            <b-col :style="{ 'background-image': `url(${match.destination1.firstImage})` }" 
+                            <b-col :style="{ 'background-image': `url(${match.destination1.firstImage === '' ? require('/public/no_image.jpg') : match.destination1.firstImage})` }" 
                                     class="worldcup-content-card"
                                     @click="selectDestination(match, match.destination1, 2)"
                                     >
@@ -78,7 +78,7 @@
                             <!--왼쪽 여행지 end-->
                             <b-col cols="3" style="text-align: center; font-size: 30px; font-weight: bolder;">vs</b-col>
                             <!--오른쪽 여행지 start-->
-                            <b-col :style="{ 'background-image': `url(${match.destination2.firstImage})` }" 
+                            <b-col :style="{ 'background-image': `url(${match.destination2.firstImage === '' ? require('/public/no_image.jpg') : match.destination2.firstImage})` }" 
                                     class="worldcup-content-card"
                                     @click="selectDestination(match, match.destination2, 2)"
                                     >
@@ -96,7 +96,7 @@
                         <!--매치 start-->
                         <b-row>
                             <!--왼쪽 여행지 start-->
-                            <b-col :style="{ 'background-image': `url(${match.destination1.firstImage})` }" 
+                            <b-col :style="{ 'background-image': `url(${match.destination1.firstImage === '' ? require('/public/no_image.jpg') : match.destination1.firstImage})` }" 
                                     class="worldcup-content-card"
                                     @click="selectDestination(match, match.destination1, 3)"
                                     >
@@ -106,7 +106,7 @@
                             <!--왼쪽 여행지 end-->
                             <b-col cols="3" style="text-align: center; font-size: 30px; font-weight: bolder;">vs</b-col>
                             <!--오른쪽 여행지 start-->
-                            <b-col :style="{ 'background-image': `url(${match.destination2.firstImage})` }" 
+                            <b-col :style="{ 'background-image': `url(${match.destination2.firstImage === '' ? require('/public/no_image.jpg') : match.destination2.firstImage})` }" 
                                     class="worldcup-content-card"
                                     @click="selectDestination(match, match.destination2, 3)"
                                     >
