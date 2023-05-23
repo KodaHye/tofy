@@ -2,63 +2,144 @@
     <div class="box">
         <div class="worldcup-content">
             <h2>여행지 이상형 월드컵</h2>
-        <div v-if="isLoading">
-            Loading...
-        </div>
-        <div v-else>
-            <div v-if="currentRound === 1">
-                <h3>16 강</h3>
-                <div v-for="match in matches" :key="match.id" class="match" v-show="match.id === currentMatchId">
-                    <div class="destination">{{ match.destination1.name }}</div>
-                    <button @click="selectDestination(match, match.destination1, 0)">Choose</button>
-                    <div class="vs">VS</div>
-                    <div class="destination">{{ match.destination2.name }}</div>
-                    <button @click="selectDestination(match, match.destination2, 0)">Choose</button>
-                </div>
-            </div>
-            <div v-else-if="currentRound === 2">
-                <h2>8 강</h2>
-                <div v-for="match in matches" :key="match.id" class="match" v-show="match.id === currentMatchId">
-                    <div class="destination">{{ match.destination1.name }}</div>
-                    <button @click="selectDestination(match, match.destination1, 1)">Choose</button>
-                    <div class="vs">VS</div>
-                    <div class="destination">{{ match.destination2.name }}</div>
-                    <button @click="selectDestination(match, match.destination2, 1)">Choose</button>
-                </div>
-            </div>
-            <div v-else-if="currentRound === 3">
-                <h2>4 강</h2>
-                <div v-for="match in matches" :key="match.id" class="match" v-show="match.id === currentMatchId">
-                    <div class="destination">{{ match.destination1.name }}</div>
-                    <button @click="selectDestination(match, match.destination1, 2)">Choose</button>
-                    <div class="vs">VS</div>
-                    <div class="destination">{{ match.destination2.name }}</div>
-                    <button @click="selectDestination(match, match.destination2, 2)">Choose</button>
-                </div>
-            </div>
-            <div v-else-if="currentRound === 4">
-                <h2>결승</h2>
-                <div v-for="match in matches" :key="match.id" class="match" v-show="match.id === currentMatchId">
-                    <div class="destination">{{ match.destination1.name }}</div>
-                    <button @click="selectDestination(match, match.destination1, 3)">Choose</button>
-                    <div class="vs">VS</div>
-                    <div class="destination">{{ match.destination2.name }}</div>
-                    <button @click="selectDestination(match, match.destination2, 3)">Choose</button>
-                </div>
+            <div v-if="isLoading">
+                Loading...
             </div>
             <div v-else>
-                <h2>Winner: {{ winner.name }}</h2>
-                <div v-if="isWinnerSelected">
-                    <p>축하합니다! {{ winner.name }}을(를) 고르셨습니다!</p>
+                <div v-if="currentRound === 1">
+                    <h3>16 강</h3>
+                    <div v-for="match in matches" :key="match.id" class="match" v-show="match.id === currentMatchId">
+                        <!--매치 start-->
+                        <b-row>
+                            <!--왼쪽 여행지 start-->
+                            <b-col :style="{ 'background-image': `url(${match.destination1.firstImage === '' ? '/public/no_image.jpg' : match.destination1.firstImage})` }" 
+                                    class="worldcup-content-card"
+                                    @click="selectDestination(match, match.destination1, 0)"
+                                    >
+                                <div class="destination">{{ match.destination1.title }}</div>
+                                <div class="destination">{{ match.destination1.addr }}</div>
+                            </b-col>
+                            <!--왼쪽 여행지 end-->
+                            <b-col cols="3" style="text-align: center; font-size: 30px; font-weight: bolder;">vs</b-col>
+                            <!--오른쪽 여행지 start-->
+                            <b-col :style="{ 'background-image': `url(${match.destination2.firstImage})` }" 
+                                    class="worldcup-content-card"
+                                    @click="selectDestination(match, match.destination2, 0)"
+                                    >
+                                <div class="destination">{{ match.destination2.title }}</div>
+                                <div class="destination">{{ match.destination2.addr }}</div>
+                            </b-col>
+                            <!--오른쪽 여행지 end-->
+                        </b-row>
+                        <!--매치 end-->
+                    </div>
+                </div>
+                <div v-else-if="currentRound === 2">
+                    <h2>8 강</h2>
+                    <div v-for="match in matches" :key="match.id" class="match" v-show="match.id === currentMatchId">
+                        <!--매치 start-->
+                        <b-row>
+                            <!--왼쪽 여행지 start-->
+                            <b-col :style="{ 'background-image': `url(${match.destination1.firstImage})` }" 
+                                    class="worldcup-content-card"
+                                    @click="selectDestination(match, match.destination1, 1)"
+                                    >
+                                <div class="destination">{{ match.destination1.title }}</div>
+                                <div class="destination">{{ match.destination1.addr }}</div>
+                            </b-col>
+                            <!--왼쪽 여행지 end-->
+                            <b-col cols="3" style="text-align: center; font-size: 30px; font-weight: bolder;">vs</b-col>
+                            <!--오른쪽 여행지 start-->
+                            <b-col :style="{ 'background-image': `url(${match.destination2.firstImage})` }" 
+                                    class="worldcup-content-card"
+                                    @click="selectDestination(match, match.destination2, 1)"
+                                    >
+                                <div class="destination">{{ match.destination2.title }}</div>
+                                <div class="destination">{{ match.destination2.addr }}</div>
+                            </b-col>
+                            <!--오른쪽 여행지 end-->
+                        </b-row>
+                        <!--매치 end-->
+                    </div>
+                </div>
+                <div v-else-if="currentRound === 3">
+                    <h2>4 강</h2>
+                    <div v-for="match in matches" :key="match.id" class="match" v-show="match.id === currentMatchId">
+                        <!--매치 start-->
+                        <b-row>
+                            <!--왼쪽 여행지 start-->
+                            <b-col :style="{ 'background-image': `url(${match.destination1.firstImage})` }" 
+                                    class="worldcup-content-card"
+                                    @click="selectDestination(match, match.destination1, 2)"
+                                    >
+                                <div class="destination" >{{ match.destination1.title }}</div>
+                                <div>{{ match.destination1.addr }}</div>
+                            </b-col>
+                            <!--왼쪽 여행지 end-->
+                            <b-col cols="3" style="text-align: center; font-size: 30px; font-weight: bolder;">vs</b-col>
+                            <!--오른쪽 여행지 start-->
+                            <b-col :style="{ 'background-image': `url(${match.destination2.firstImage})` }" 
+                                    class="worldcup-content-card"
+                                    @click="selectDestination(match, match.destination2, 2)"
+                                    >
+                                <div class="destination">{{ match.destination2.title }}</div>
+                                <div class="destination">{{ match.destination2.addr }}</div>
+                            </b-col>
+                            <!--오른쪽 여행지 end-->
+                        </b-row>
+                        <!--매치 end-->
+                    </div>
+                </div>
+                <div v-else-if="currentRound === 4">
+                    <h2>결승</h2>
+                    <div v-for="match in matches" :key="match.id" class="match" v-show="match.id === currentMatchId">
+                        <!--매치 start-->
+                        <b-row>
+                            <!--왼쪽 여행지 start-->
+                            <b-col :style="{ 'background-image': `url(${match.destination1.firstImage})` }" 
+                                    class="worldcup-content-card"
+                                    @click="selectDestination(match, match.destination1, 3)"
+                                    >
+                                <div class="destination">{{ match.destination1.title }}</div>
+                                <div class="destination">{{ match.destination1.addr }}</div>
+                            </b-col>
+                            <!--왼쪽 여행지 end-->
+                            <b-col cols="3" style="text-align: center; font-size: 30px; font-weight: bolder;">vs</b-col>
+                            <!--오른쪽 여행지 start-->
+                            <b-col :style="{ 'background-image': `url(${match.destination2.firstImage})` }" 
+                                    class="worldcup-content-card"
+                                    @click="selectDestination(match, match.destination2, 3)"
+                                    >
+                                <div class="destination">{{ match.destination2.title }}</div>
+                                <div class="destination">{{ match.destination2.addr }}</div>
+                            </b-col>
+                            <!--오른쪽 여행지 end-->
+                        </b-row>
+                        <!--매치 end-->
+                    </div>
+                </div>
+                <div v-else>
+                    <h2>Winner: {{ winner.title }}</h2>
+                    <div v-if="isWinnerSelected">
+                        <p>축하합니다! {{ winner.title }}을(를) 고르셨습니다!</p>
+                        <div class="worldcup-content-card"
+                            :style="{ 'background-image': `url(${winner.firstImage})` }"
+                            style="margin: auto;"
+                        >
+                            <div class="destination">{{ winner.title }}</div>
+                            <div class="destination">{{ winner.addr }}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
 
     </div>
 </template>
   
 <script>
+import { pickRandomAttractions } from '@/api/worldcup';
+
 export default {
     name: 'TravelWorldCup',
     data() {
@@ -78,32 +159,21 @@ export default {
         };
     },
     created() {
-        this.fetchDestinations();
+        pickRandomAttractions(
+            data => {
+                this.destinations[0] = data.data.data.attractions;
+                this.fetchDestinations();
+            },
+            err => {
+                console.log(err);
+            }
+        )
     },
     methods: {
         fetchDestinations() {
-
-            this.destinations[0] = [
-                { id: 1, name: 'Destination 1' },
-                { id: 2, name: 'Destination 2' },
-                { id: 3, name: 'Destination 3' },
-                { id: 4, name: 'Destination 4' },
-                { id: 5, name: 'Destination 5' },
-                { id: 6, name: 'Destination 6' },
-                { id: 7, name: 'Destination 7' },
-                { id: 8, name: 'Destination 8' },
-                { id: 9, name: 'Destination 9' },
-                { id: 10, name: 'Destination 10' },
-                { id: 11, name: 'Destination 11' },
-                { id: 12, name: 'Destination 12' },
-                { id: 13, name: 'Destination 13' },
-                { id: 14, name: 'Destination 14' },
-                { id: 15, name: 'Destination 15' },
-                { id: 16, name: 'Destination 16' }
-            ];
-            console.log(this.destinations[0]);
             this.createMatches(0);
             this.isLoading = false;
+            console.log(this.matches);
         },
         createMatches(round) {
             //현재 라운드에 올라간 여행지를 섞는다.
@@ -175,6 +245,8 @@ export default {
 .destination {
     font-size: 20px;
     margin-right: 10px;
+    margin-top: 20px;
+    color: black
 }
 
 .vs {
@@ -187,5 +259,27 @@ export default {
     flex-grow: 1;
     border-radius: 20px;
     max-width: 80vw;
+    text-align: center;
+}
+
+.worldcup-content-card {
+    border-radius: 10px; 
+    box-shadow: 10px; 
+    height: 60vh; 
+    width: 60vw; 
+    background-size: cover;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    animation: move 1.0s alternate;
+    transition: transform 0.3s ease-in-out;
+}
+
+.worldcup-content-card:hover {
+    transform: scale(1.05);
+}
+
+@keyframes move {
+    0% { transform: scale(1, 1); }
+    5% {transform: scale(0.9, 0.9);}
+    0% {transform: scale(1, 1);}
 }
 </style>

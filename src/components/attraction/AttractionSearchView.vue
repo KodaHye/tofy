@@ -188,9 +188,6 @@ export default {
                 type: this.type
             }
 
-            //확인
-            console.log(attractionInfo);
-
             axios.post(`http://localhost:9999/tofy/attraction/map`, attractionInfo)
                 .then(res => {
                     console.log("결과 : " + res[0]);

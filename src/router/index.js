@@ -11,6 +11,11 @@ const routes = [
     component: HomeView
   },
   {
+    path:'/test',
+    name: 'test',
+    component: () => import('@/views/TestAosView.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import("@/views/loginView.vue"),
@@ -147,15 +152,15 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.path === '/') {
-  // '/' 경로일 때만 fullpage.min.js 파일 동적으로 로드
-  const script = document.createElement('script')
-  script.src = '/fullpage.min.js'
-  document.head.appendChild(script)
-  }
+// router.beforeEach((to, from, next) => {
+//   if (to.path === '/') {
+//   // '/' 경로일 때만 fullpage.min.js 파일 동적으로 로드
+//   const script = document.createElement('script')
+//   script.src = '/fullpage.min.js'
+//   document.head.appendChild(script)
+//   }
 
-  next()
-  })
+//   next()
+//   })
 
 export default router

@@ -1,126 +1,171 @@
 <template>
-  <div id="">
-  <!-- <div id="fullpage"> -->
-    <!-- 첫번째 Section -->
-    <div class="section" style="background-image: url('/main_img/unicorn_1.jpeg'); background-size: 100% 100%;">
-      <div class="section-content">
-        <span style="font-size: 40pt;">
-          Trip only for you
-        </span>
+  <div class="box">
+    <!--타이틀 start-->
+    <div class="section">
+      <div class="title" data-aos="fade-up" data-aos-duration="3000" data-aos-anchor-placement="bottom-bottom">
+        <h1>Trip only for you</h1>
       </div>
     </div>
-
-    <!-- 두번째 Section -->
-    <div class="section" style="background-image: url('/main_img/unicorn_2.jpeg'); background-size: 100% 100%;">
-      <div class="section-content">
-        <div>
-          <span style="font-size: 28pt;">당신이 가고싶은 여행지를</span>
-        </div>
-        <div><span style="font-size: 28pt;">골라보세요.</span></div>
-        <div style="margin: 10px;"><span style="font-size: 17pt;">여행지 월드컵하러 가기</span></div>
+    <!--타이틀 end-->
+    <!--월드컵 하러가기 문구 start-->
+    <div class="section">
+      <div class="title" data-aos="fade-up" data-aos-duration="3000" data-aos-anchor-placement="bottom-bottom">
+        <h1>당신이 가고싶은 여행지를 골라보세요.</h1>
+        <a href="#" @click="$router.push('/worldcup')">여행 하러가기</a>
       </div>
     </div>
-    <!-- 우리지역 관광지 끝 -->
-
-
-    <!-- 나만의 여행계획 시작-->
-    <div class="section" style="background-image: url('/main_img/unicorn_3.jpeg'); background-size: 100% 100%;">
-      <!-- 크기 설정하기, card 캐러셀같이 하거나 -->
-      <div class="container" style="margin-top: 120px;">
-        <div>
-          <span style="font-size: 17pt;">당신과 비슷한 사람들이 선택한 여행지입니다.</span>
-        </div>
-
-        <div class="row">
-          <div class="card" style="width: 18rem;">
-            <img src="" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+    <!--월드컵 하러가기 문구 end-->
+    <!--로그인 시 사용자 기반 추천 여행지 보이기 start-->
+    <div class="section">
+      <!--여기에 캐러셀 구현 예정-->
+      <div style="margin-right: 50px; margin-left: 50px;" data-aos="fade-up">
+        <carousel ref="carousel" :perPage="5" :navigation-enabled="true"
+          navigationPrevLabel='<i class="fas fa-angle-left"></i>'
+          navigationNextLabel='<i class="fa fa-angle-right" aria-hidden="true"></i>'>
+          <slide v-for="card in cards" :key="card.id">
+            <!-- 카드 내용을 추가하세요 -->
+            <div class="card">
+              <img :src="card.image" alt="카드 이미지" />
+              <h3>{{ card.title }}</h3>
+              <p>{{ card.description }}</p>
             </div>
-          </div>
-
-          <div class="card" style="width: 18rem;">
-            <img src="" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-
-          <div class="card" style="width: 18rem;">
-            <img src="" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
+          </slide>
+        </carousel>
       </div>
-      <!-- 나만의 여행계획 끝 -->
-      <footer class="p-4 mt-3 container-fluid"
-        style="position: absolute; bottom: 0; background-color: rgba(50, 50, 50, 0.1);">
-        <nav>
-          <a href="#">GitHub</a> |
-          <a href="#">Blog</a>
-        </nav>
-        <p>
-          <span>대표 : 김현수, 고다혜</span><br>
-          <span>주소 : 대전 유성구 동서대로 98-39</span><br>
-          <span>Copyright 2023. ssafy. All Rights Reserved.</span><br>
-        </p>
-      </footer>
     </div>
-
+    <!--로그인 시 사용자 추천 여행지 보이기 start-->
   </div>
 </template>
 
 <script>
+import { Carousel, Slide } from 'vue-carousel';
 
 export default {
-  mounted() {
+  components: {
+    Carousel,
+    Slide,
+  },
+  data() {
+    return {
+      cards: [
+        {
+          id: 1,
+          image: '이미지 URL',
+          title: '여행지 이름',
+          description: '간단한 여행지 설명',
+        },
+        {
+          id: 2,
+          image: '이미지 URL',
+          title: '여행지 이름',
+          description: '간단한 여행지 설명',
+        },
+        {
+          id: 3,
+          image: '이미지 URL',
+          title: '여행지 이름',
+          description: '간단한 여행지 설명',
+        },
+        {
+          id: 4,
+          image: '이미지 URL',
+          title: '여행지 이름',
+          description: '간단한 여행지 설명',
+        },
+        {
+          id: 5,
+          image: '이미지 URL',
+          title: '여행지 이름',
+          description: '간단한 여행지 설명',
+        },
+        {
+          id: 6,
+          image: '이미지 URL',
+          title: '여행지 이름',
+          description: '간단한 여행지 설명',
+        },
+        // 다른 카드들도 추가하세요
+      ],
+    }
+  },
+  created() {
 
+
+  },
+  mounted() {
   },
 };
 </script>
 
+<style>
+.VueCarousel-pagination {
+  display: none !important;
+}
+
+.VueCarousel-navigation-button {
+  font-weight: bolder !important;
+  padding-top: 0px !important;
+  height: 50px !important;
+  font-size: 25pt !important;
+  color: gray !important;
+  opacity: 25% !important;
+}
+</style>
+
 <style scoped>
+.card {
+  /* 카드 스타일을 설정하세요 */
+  margin: 5px;
+  padding: 10px;
+}
+
+.card>p {
+  margin: 0px;
+}
+
 .section {
-  margin: 0;
-  padding: 0;
+  height: 82vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.section-content {
-  position: relative;
+.title {
   text-align: center;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -100%);
 }
 
-.main-footer {
-  left: 0;
-  width: 100%;
-  padding: 20px;
-  background-color: #f5f5f5;
+.title>* {
+  color: black;
 }
 
-.init_screen {
-  animation: fadein 2s;
+.title>a {
+  font-size: 20px®;
 }
 
-@keyframes fadein {
-  from {
-    opacity: 0;
+.title>a:hover {
+  text-decoration: none;
+  animation: change-color 0.3s forwards;
+}
+
+@keyframes change-color {
+  0% {
+    color: black;
   }
 
-  to {
-    opacity: 1;
+  25% {
+    color: rgb(35, 35, 35);
   }
-}</style>
+
+  50% {
+    color: rgb(87, 86, 86);
+  }
+
+  75% {
+    color: rgb(103, 103, 103);
+  }
+
+  100% {
+    color: rgb(106, 106, 106);
+  }
+}
+</style>

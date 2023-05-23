@@ -3,7 +3,7 @@
     <nav>
       <the-header></the-header>
         <router-view class="router-view"></router-view>
-      <the-footer v-if="$route.name !== 'home'"></the-footer>
+      <the-footer></the-footer>
     </nav>
   </div>
 </template>

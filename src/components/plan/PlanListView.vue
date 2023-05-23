@@ -11,7 +11,7 @@
             <div class="">
                 <div class="row align-self-center mb-2">
                     <div class="col-md-2 text-start">
-                        <b-button variant="outline-primary" @click="$router.push({ name: 'planwrite' })">계획 만들기</b-button>
+                        <b-button variant="outline-primary" @click="$router.push({ name: 'planWrite' })">계획 만들기</b-button>
                     </div>
                     <div class="col-md-3"></div>
                     <div class="col-md-7">
