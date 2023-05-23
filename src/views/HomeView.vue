@@ -3,15 +3,15 @@
     <!--타이틀 start-->
     <div class="section">
       <div class="title" data-aos="fade-up" data-aos-duration="3000" data-aos-anchor-placement="bottom-bottom">
-        <h1>Trip only for you</h1>
+        <h1 style="font-size: 40pt; opacity: 0.8;">Trip only for you</h1>
       </div>
     </div>
     <!--타이틀 end-->
     <!--월드컵 하러가기 문구 start-->
     <div class="section">
       <div class="title" data-aos="fade-up" data-aos-duration="3000" data-aos-anchor-placement="bottom-bottom">
-        <h1>당신이 가고싶은 여행지를 골라보세요.</h1>
-        <a href="#" @click="$router.push('/worldcup')">여행 하러가기</a>
+        <h1 style="font-size: 30pt; opacity: 0.8; margin-bottom: 10px;">당신이 가고싶은 여행지를 골라보세요.</h1>
+        <a href="#" @click="$router.push('/worldcup')"><span style="font-size: 20pt; opacity: 0.8;">여행 하러가기</span></a>
       </div>
     </div>
     <!--월드컵 하러가기 문구 end-->
@@ -19,18 +19,21 @@
     <div class="section">
       <!--여기에 캐러셀 구현 예정-->
       <div style="margin-right: 50px; margin-left: 50px;" data-aos="fade-up">
-        <carousel ref="carousel" :perPage="5" :navigation-enabled="true"
-          navigationPrevLabel='<i class="fas fa-angle-left"></i>'
-          navigationNextLabel='<i class="fa fa-angle-right" aria-hidden="true"></i>'>
-          <slide v-for="card in cards" :key="card.id">
-            <!-- 카드 내용을 추가하세요 -->
-            <div class="card">
-              <img :src="card.image" alt="카드 이미지" />
-              <h3>{{ card.title }}</h3>
-              <p>{{ card.description }}</p>
-            </div>
-          </slide>
-        </carousel>
+        <carousel ref="carousel" :perPage="4" :navigation-enabled="true"
+                        navigationPrevLabel='<i class="fas fa-angle-left"></i>'
+                        navigationNextLabel='<i class="fa fa-angle-right" aria-hidden="true"></i>'>
+                        <slide v-for="card in recommendAttr" :key="card.id"
+                            style="box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;">
+                            <!-- 카드 내용을 추가하세요 -->
+                            <div class="card" style="height: 200px;">
+                                <div style="width: 100%; height: 60%;" class="image-box">
+                                    <img :src="card.firstImage" alt="카드 이미지" class="image-thumbnail" />
+                                </div>
+                                <p>{{ card.title }}</p>
+                                <p>{{ card.addr }}</p>
+                            </div>
+                        </slide>
+                    </carousel>
       </div>
     </div>
     <!--로그인 시 사용자 추천 여행지 보이기 start-->
@@ -39,6 +42,7 @@
 
 <script>
 import { Carousel, Slide } from 'vue-carousel';
+import http from "@/api/http";
 
 export default {
   components: {
@@ -47,50 +51,16 @@ export default {
   },
   data() {
     return {
-      cards: [
-        {
-          id: 1,
-          image: '이미지 URL',
-          title: '여행지 이름',
-          description: '간단한 여행지 설명',
-        },
-        {
-          id: 2,
-          image: '이미지 URL',
-          title: '여행지 이름',
-          description: '간단한 여행지 설명',
-        },
-        {
-          id: 3,
-          image: '이미지 URL',
-          title: '여행지 이름',
-          description: '간단한 여행지 설명',
-        },
-        {
-          id: 4,
-          image: '이미지 URL',
-          title: '여행지 이름',
-          description: '간단한 여행지 설명',
-        },
-        {
-          id: 5,
-          image: '이미지 URL',
-          title: '여행지 이름',
-          description: '간단한 여행지 설명',
-        },
-        {
-          id: 6,
-          image: '이미지 URL',
-          title: '여행지 이름',
-          description: '간단한 여행지 설명',
-        },
-        // 다른 카드들도 추가하세요
-      ],
+      recommendAttr: [],
     }
   },
   created() {
-
-
+        // 여행지에 대한 추천 불러오기
+        // 사용자 기반 추천
+        http.get(`/recommend/125266`).then(({ data }) => {
+            this.recommendAttr = data.data.recommendAttr
+            console.log(this.recommendAttr);
+        })
   },
   mounted() {
   },
