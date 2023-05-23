@@ -44,7 +44,10 @@
 
             <div style="margin: 20px 0px 60px 0px;">
                 <div>
-                    <h2>가볼만한 여행지 추천</h2>
+                    <div class = "row" style="padding-left: 15px; display: flex; align-items: baseline;" >
+                        <h2 style="padding-right: 10px;">가볼만한 여행지 추천</h2>
+                        <span style="">top 10</span>
+                    </div>
                     <span>나와 비슷한 태그를 고른 사람들이 많이 선택한 순서대로 여행지가 추천됩니다.</span>
                 </div>
                 <div>
@@ -52,11 +55,16 @@
                         navigationPrevLabel='<i class="fas fa-angle-left"></i>'
                         navigationNextLabel='<i class="fa fa-angle-right" aria-hidden="true"></i>'>
                         <slide v-for="card in recommendAttr" :key="card.id"
-                            style="box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;">
+                            style="box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;">
                             <!-- 카드 내용을 추가하세요 -->
                             <div class="card" style="height: 200px;">
                                 <div style="width: 100%; height: 60%;" class="image-box">
-                                    <img :src="card.firstImage" alt="카드 이미지" class="image-thumbnail" />
+                                    <img v-if="card.firstImage" :src="card.firstImage" alt="카드 이미지"
+                                        class="image-thumbnail" />
+                                    <div v-else class="image-thumbnail"
+                                        style="display: flex; justify-content: center; align-items: center;">
+                                        <img src="@/assets/img/no_image.jpg" style="max-width: 100%; max-height: 100%;" />
+                                    </div>
                                 </div>
                                 <p>{{ card.title }}</p>
                                 <p>{{ card.addr }}</p>
@@ -108,13 +116,19 @@
 
                 <div style="background-color: rgba(255, 255, 255, 0.9);" v-if="reviews.length !== 0">
                     <div v-for="(review, i) in reviews" :key="i" style="padding: 15px 0px">
-                        <div class="row" style="display: flex; justify-content: space-between; padding: 0 20px;">
-                            <div style="padding-left: 5px;">
+                        <div class="row" style="display: flex; padding-left:25px;">
+                            <div style="padding-left: 5px;" class="col-2">
                                 <!-- 작성자 이름 -->
                                 <span>작성자: </span>
                                 <span>{{ review.userNo }}</span>
                             </div>
-                            <div class="row" style="padding-right: 20px">
+                            <div style="padding-left: 5px;" class="col-2">
+                                <!-- 작성자 이름 -->
+                                <span>별점: </span>
+                                <span>{{ review.attractionReviewScore }}</span>
+
+                            </div>
+                            <div class="row col-8" style="text-align: right; display: flex; justify-content: flex-end;">
                                 <div>
                                     {{ review.attractionReviewCreate }}
                                 </div>
@@ -123,7 +137,8 @@
                             </div>
                         </div>
 
-                        <div style="padding: 0 10px;">
+
+                        <div style="padding: 0 15px;">
                             {{ review.attractionReviewContent }}
                         </div>
                     </div>
@@ -234,6 +249,8 @@ export default {
     /* 카드 스타일을 설정하세요 */
     margin: 5px;
     padding: 10px;
+    border: 0px;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .card>p {
