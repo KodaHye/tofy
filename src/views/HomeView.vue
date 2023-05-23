@@ -18,7 +18,7 @@
     <!--로그인 시 사용자 기반 추천 여행지 보이기 start-->
     <div class="section">
       <!--여기에 캐러셀 구현 예정-->
-      <div style="margin-right: 50px; margin-left: 50px;" data-aos="fade-up">
+      <div style="margin-right: 50px; margin-left: 50px;" data-aos="fade-up" data-aos-duration="3000" data-aos-anchor-placement="bottom-bottom">
         <carousel ref="carousel" :perPage="5" :navigation-enabled="true"
           navigationPrevLabel='<i class="fas fa-angle-left"></i>'
           navigationNextLabel='<i class="fa fa-angle-right" aria-hidden="true"></i>'>

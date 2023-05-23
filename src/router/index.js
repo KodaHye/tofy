@@ -2,7 +2,35 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+import store from "@/store";
+
 Vue.use(VueRouter)
+
+const onlyAuthUser = async (to, from, next) => {
+  const checkUserInfo = store.getters["userStore/checkUserInfo"];
+  const checkToken = store.getters["userStore/checkToken"];
+  let token = sessionStorage.getItem("access-token");
+  console.log("로그인 처리 전", checkUserInfo, token);
+
+  if (checkUserInfo != null && token) {
+    console.log("토큰 유효성 체크");
+    await store.dispatch("memberStore/getUserInfo", token);
+  }
+  if (!checkToken || checkUserInfo === null) {
+    alert("로그인이 필요합니다.");
+    // next({ name: "login" });
+    router.push({ name: "login" }).catch(error => {
+      if (error.name !== 'NavigationDuplicated') {
+        throw error;
+      }
+    });
+  } else {
+    console.log("로그인 완료");
+    next();
+  }
+};
+
+
 
 const routes = [
   {
@@ -55,12 +83,14 @@ const routes = [
   {
     path: '/worldcup',
     name: 'worldcup',
+    beforeEnter: onlyAuthUser,
     component: () => import("@/views/AttractionWorldCupView.vue"),
   },
   {
     path: '/freeboard',
     name: 'freeboard',
     redirect: "/freeboard/list",
+    beforeEnter: onlyAuthUser,
     component: () => import("@/views/FreeBoardView"),
     children: [
       {
@@ -112,6 +142,7 @@ const routes = [
     path: '/plan',
     name: 'plan',
     redirect: "/plan/list",
+    beforeEnter: onlyAuthUser,
     component: () => import("@/views/PlanView"),
     children: [
       {
@@ -130,6 +161,7 @@ const routes = [
     path: '/attraction',
     name: 'attraction',
     redirect: "/attraction/search",
+    beforeEnter: onlyAuthUser,
     component: () => import("@/views/AttractionView"),
     children: [
       {
