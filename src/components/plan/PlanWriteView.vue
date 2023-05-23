@@ -70,15 +70,23 @@
                 </div>
                 <div class="border col-sm-12 col-md-12 col-lg-3 col-3"
                     style="border: 1px; border-color:#ced4da; border-radius: 0.375rem;">
-                    <div style="margin: 10px 0px;"><span>나의 여행코스</span></div>
-                    <draggable v-model="attractionPlanList">
-                        <div v-for="attraction in this.attractionPlanList" :key="attraction.contentId"
-                        class = "row">
-                            <!-- {{ attraction.firstImage }} -->
-                            <div>{{ attraction.title }}</div>
-                            <div>{{ attraction.title }}</div>
-                        </div>
-                    </draggable>
+                    <div style="margin: 10px 0px;"><span>내가 추가한 여행코스</span></div>
+                    <div class="container" style="overflow: auto; height: 500px;">
+                        <table id="attractions" class="table table-striped align-middle">
+                            <draggable v-model="attractionPlanList">
+                            <tr v-for="attraction in this.attractionPlanList" :key="attraction.contentId"
+                                    @click="addPlan(attraction.contentId);">
+                                    <!-- @click="addPlan(attraction.contentId); moveCenter(attraction.latitude, attraction.longitude);"> -->
+
+                                    <td><img :src="attraction.firstImage" style="width: 100px;"></td>
+                                    <td style="width: 300px">{{ attraction.title }}</td>
+                                    <!-- <td><button @click="buttonClicked(area.contentId)">추가</button></td> -->
+                                    <!-- <td><input type="hidden" :name="attraction.contentId" :value="attraction.contentId"></td> -->
+                            </tr>
+                        </draggable>
+                        </table>
+
+                    </div>
                 </div>
             </div>
 
@@ -147,17 +155,24 @@ export default {
             mapContainer: {},
             mapOption: {},
             positions: [],
+            plan: {},
+            title: "",
             content: "",
-            planList: [],
+            startDate: "",
+            endDate: "",
             attractionList: [],
             attractionListItem: [],
-            attractionPlanList: [],
+            attractionPlanList: [], // 계획 상세 배열
         };
     },
     created() { },
     methods: {
-        submitPlan(planList) {
-            console.log(planList)
+        submitPlan() {
+            this.plan.title = this.title;
+            this.plan.content = this.content;
+            this.plan.attractionPlanList = this.attractionList;
+
+            console.log(this.attractionPlanList)
         },
         getAttractions() {
 
@@ -204,9 +219,11 @@ export default {
             // 선택한 contentId에 맞는 여행지 정보 불러오기
             // 나의 여행코스에 추가하기
             // document.querySelector("")
-            console.log(contentId)
-
-            if (this.attractionPlanList.includes(contentId)) return;
+            console.log(this.attractionPlanList);
+            if (this.attractionPlanList.some(item => item.contentId === contentId)) {
+                return;
+            }
+            // if (this.attractionPlanList.includes(contentId === contentId)) return;
             // attractionPlanList에 추가하고, 삭제할 수 있어야 됨
             // this.attractionPlanList.push(contentId);
             // console.log(this.attractionPlanList);
