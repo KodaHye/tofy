@@ -246,7 +246,8 @@ export default {
     font-size: 20px;
     margin-right: 10px;
     margin-top: 20px;
-    color: black
+    color: black;
+    text-shadow: 2px 2px 4px rgb(255, 255, 255);
 }
 
 .vs {
