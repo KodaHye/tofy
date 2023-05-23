@@ -106,7 +106,7 @@ export default {
         };
     },
     created() {
-        fetch('http://localhost:9999/tofy/attraction/sido')
+        fetch('http://192.168.208.73:9999/tofy/attraction/sido')
             .then(response => response.json())
             .then(data => {
                 // <select> 태그의 <option> 데이터 업데이트
@@ -129,7 +129,8 @@ export default {
     methods: {
         loadScript() {
             const script = document.createElement("script");
-            script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=09ba918a188ed18bf9d1f53d737a194a&libraries=services,clusterer,drawing&autoload=false";
+            const SERVICE_KEY = process.env.VUE_APP_KAKAO_API_KEY;
+            script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${SERVICE_KEY}&libraries=services,clusterer,drawing&autoload=false`;
 
             script.onload = () => window.kakao.maps.load(this.loadMap);
 
@@ -149,7 +150,7 @@ export default {
         },
 
         getGugun() {
-            axios.get(`http://localhost:9999/tofy/attraction/gugun/${this.sidoCode}`)
+            axios.get(`http://192.168.208.73:9999/tofy/attraction/gugun/${this.sidoCode}`)
                 .then(res => {
                     // <select> 태그의 <option> 데이터 업데이트
                     const selectTag = document.getElementById("regionDetail");
@@ -188,7 +189,7 @@ export default {
                 type: this.type
             }
 
-            axios.post(`http://localhost:9999/tofy/attraction/map`, attractionInfo)
+            axios.post(`http://192.168.208.73:9999/tofy/attraction/map`, attractionInfo)
                 .then(res => {
                     console.log("결과 : " + res[0]);
                     this.makeList(res.data);
