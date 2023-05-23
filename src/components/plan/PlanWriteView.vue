@@ -64,16 +64,21 @@
                 <div class="col-sm-12 col-md-12 col-lg-6 col-6">
                     <!-- kakaoMap API  start  -->
                     <div class="map container">
-                        <div id="map" style="height: 400px"></div>
+                        <div id="map" style="height: 600px"></div>
                     </div>
                     <!-- kakaoMap API  end -->
                 </div>
                 <div class="border col-sm-12 col-md-12 col-lg-3 col-3"
                     style="border: 1px; border-color:#ced4da; border-radius: 0.375rem;">
                     <div style="margin: 10px 0px;"><span>나의 여행코스</span></div>
-                    <div v-for="attraction in this.attractionPlanList" :key="attraction.contentId">
-                        {{ attraction }}
-                    </div>
+                    <draggable v-model="attractionPlanList">
+                        <div v-for="attraction in this.attractionPlanList" :key="attraction.contentId"
+                        class = "row">
+                            <!-- {{ attraction.firstImage }} -->
+                            <div>{{ attraction.title }}</div>
+                            <div>{{ attraction.title }}</div>
+                        </div>
+                    </draggable>
                 </div>
             </div>
 
@@ -112,7 +117,7 @@
                     <div style="padding-right: 7px;">
                         <!-- <button type="button" id="btn-register" class="btn btn-outline-primary"
                             @click="writeBoard">글작성</button> -->
-                        <button type="button" id="btn-register" class="btn btn-outline-primary">글작성</button>
+                        <button type="button" id="btn-register" class="btn btn-outline-primary" @click="submitPlan">글작성</button>
                     </div>
                     <div>
                         <button type="reset" class="btn btn-outline-danger">초기화</button>
@@ -128,10 +133,13 @@
 
 <script>
 import http from "@/api/http";
+import draggable from 'vuedraggable'
 
 export default {
     name: 'PlanWrite',
-    components: {},
+    components: {
+        draggable,
+    },
     data() {
         return {
             map: null,
@@ -140,6 +148,7 @@ export default {
             mapOption: {},
             positions: [],
             content: "",
+            planList: [],
             attractionList: [],
             attractionListItem: [],
             attractionPlanList: [],
@@ -147,6 +156,9 @@ export default {
     },
     created() { },
     methods: {
+        submitPlan(planList) {
+            console.log(planList)
+        },
         getAttractions() {
 
             const attractionInfo = {
@@ -188,21 +200,35 @@ export default {
             });
         },
         addPlan(contentId) {
+
             // 선택한 contentId에 맞는 여행지 정보 불러오기
             // 나의 여행코스에 추가하기
             // document.querySelector("")
-            console.log(contentId);
-            http.get(`/attraction/${contentId}`).then(({ data }) => {
-                console.log(data)
-                this.attractionDto = data.attractionDto;
-                this.attractionDesc = data.attractionDesc;
-                // console.log(this.attractionDto)
-                // console.log(this.attractionDesc)
-            })
+            console.log(contentId)
 
+            if (this.attractionPlanList.includes(contentId)) return;
             // attractionPlanList에 추가하고, 삭제할 수 있어야 됨
-            this.attractionPlanList.push(contentId);
-            console.log(this.attractionPlanList);
+            // this.attractionPlanList.push(contentId);
+            // console.log(this.attractionPlanList);
+            // console.log(this.attractionList.attractionDesc)
+
+            http.get(`/attraction/${contentId}`).then(({ data }) => {
+                this.planAttr = data;
+                console.log(this.planAttr)
+                console.log(this.planAttr.attractionDesc)
+
+                this.attractionPlanList.push(this.planAttr.attractionDto);
+                // const tmpAttractionDesc = this.planAttr.attractionDto;
+                console.log(this.attractionPlanList);
+            })
+            // http.get(`/attraction/${contentId}`).then(({ data }) => {
+            // console.log(data)
+            // this.attractionDto = data.attractionDto;
+            // this.attractionDesc = data.attractionDesc;
+            // // console.log(this.attractionDto)
+            // // console.log(this.attractionDesc)
+            // }
+
         },
         loadScript() {
             const SERVICE_KEY = process.env.VUE_APP_KAKAO_API_KEY;
@@ -225,64 +251,6 @@ export default {
 
             this.map = new window.kakao.maps.Map(this.mapContainer, this.mapOption);
         },
-
-        // makeList(data) {
-        // document.querySelector("#attractions").setAttribute("style", "display: ;");
-        // let tripList = ``;
-
-        // //data = 검색 결과로 DB에서 가져온 여행지 정보 리스트  => forEach 내에서는 area로 사용
-        // data.forEach((area) => {
-        //     // 여행지 정보 리스트 출력 목적의 TagSet 추가
-        //     tripList += `
-        //     <tr @click="moveCenter(${area.latitude}, ${area.longitude})">
-        //         <td><img src="${area.firstImage}" width="100px" height="60px"></td>
-        //         <td>${area.title}</td>
-        //         <td>${area.addr} ${area.addr2}</td>
-        //     </tr>
-        // `;
-
-        /*
-            positions 배열에 들어가는 값
-            - content   : maker에 마우스 커서 이벤트 (overlay)로 나타날 여행지 간략 정보
-            - latlng    : maker가 배치될 좌표 (위/경도)
-            - title     : 여행지 이름
-            - type      : 여행지 구분 코드
-            - contentid : 여행지 고유 번호 (DB Key)
-            - address   : 여행지 주소
-            - imgsrc    : 여행지 대표 사진
-        */
-        //         let markerInfo = {
-        //             content:
-        //                 `<div class="container">
-        //                     <div class="row p-1 bg-success bg-opacity-10">
-        //                         <p class="text-center fs-6">${area.title}</p>
-        //                     </div>
-        //                     <div class="row p-1">
-        //                         <div class="col-4 attraction-first-card" style="background-image: url(${area.firstImage}); padding-bottom: 3px;">
-        //                     </div>
-        //                     <div class="col-8">
-        //                         <p class="text-start fs-6">${area.addr}</p>
-        //                     </div>
-        //                 </div>
-        //         `,
-        //             latlng: new window.kakao.maps.LatLng(area.latitude, area.longitude),
-        //             title: area.title,
-        //             type: area.contentTypeId,
-        //             contentid: area.contentId,
-        //             address: area.addr + area.addr2,
-        //             imgsrc: area.firstImage,
-        //         };
-        //         this.positions.push(markerInfo);
-        //     });
-
-        //     //console.log(positions);
-        //     //HTML에 여행지 정보 리스트 출력
-        //     document.getElementById("trip-list").innerHTML = tripList;
-
-        //     //카카오맵에 여행지 리스트 Maker 생성
-        //     this.displayMarker();
-        // },
-
     },
     mounted() {
         if (window.kakao && window.kakao.maps) {
