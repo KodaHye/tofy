@@ -1,61 +1,75 @@
 <template>
     <div class="box">
         <div class="contentdetail">
-            <div style="margin: 20px 0px 50px 0px;">
-                <div>
-                    <h2>관광지 상세정보</h2>
-                </div>
-                <div>
-                    <span>{{ }}에 대한 상세정보입니다.</span>
+            <div style="margin: 20px 0px 60px 0px;">
+                <h2 style="padding-bottom: 10px;">관광지 상세정보</h2>
+
+                <div class="row">
+                    <div class="col-8">
+                        <span style="font-size: 15pt;"><span style="font-weight: bold;">{{ attractionDto.title }}</span> 에
+                            대한
+                            상세정보입니다.</span>
+                    </div>
+                    <div class="col-4" style="text-align: right;">
+                        평균별점: {{ }}
+                    </div>
                 </div>
             </div>
 
-            <div style="margin: 20px 0px 50px 0px;">
-                <div class="row" style="margin-left: 5px;">
-                    <div>
-                        <h2>`{{ 관광지이름 }}`</h2>
-                    </div>
-                    <div>
-                        평균별점:
-                    </div>
+            <div style="margin: 20px 0px 60px 0px;">
+                <div class="container" style="padding-bottom: 20px;">
+                    <img v-if="attractionDto.firstImage" :src="attractionDto.firstImage" alt="이미지 불러오기 실패"
+                        style="width: 100%; margin-bottom: 30px; box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px; border-radius: 3pt;" />
+                    <img v-else src="@/assets/img/no_image.jpg"
+                        style="width: 200px; margin-bottom: 30px; border-radius: 3pt; display: block; margin: 0 auto; margin-bottom: 30px;" />
                 </div>
-
-                <div style="margin-bottom: 10px;"><img src="" alt="이미지 불러오기 실패" /></div>
 
                 <div style="margin-bottom: 20px;">
-                    <div><span style="font-weight: bold;">주소</span></div>
-                    <div>여행지 주소</div>
+                    <div style="margin-bottom: 15px;">
+                        <span style="font-weight: bold;">주소</span><br>
+                        <span>{{ attractionDto.addr }}</span>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <span style="font-weight: bold;">상세 주소 </span><br>
+                        <span v-if="attractionDto.addr2">{{ attractionDto.addr2 }}</span>
+                        <span v-else>상세주소 없음</span>
+                    </div>
                 </div>
 
-                <div>설명</div>
+                <div>
+                    <span style="font-weight: bold;">설명</span><br>
+                    <span>{{ attractionDesc.desc }}</span>
+                </div>
             </div>
 
-            <div style="margin: 20px 0px;">
+            <div style="margin: 20px 0px 60px 0px;">
                 <div>
-                    <h2>비슷한 여행지 추천</h2>
-                    <span>해당 여행지와 비슷한 여행지 목록입니다.</span>
+                    <h2>가볼만한 여행지 추천</h2>
+                    <span>나와 비슷한 태그를 고른 사람들이 많이 선택한 순서대로 여행지가 추천됩니다.</span>
                 </div>
-
                 <div>
-                    <carousel ref="carousel" :perPage="5">
-                        <slide v-for="card in cards" :key="card.id">
+                    <carousel ref="carousel" :perPage="4" :navigation-enabled="true"
+                        navigationPrevLabel='<i class="fas fa-angle-left"></i>'
+                        navigationNextLabel='<i class="fa fa-angle-right" aria-hidden="true"></i>'>
+                        <slide v-for="card in recommendAttr" :key="card.id"
+                            style="box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;">
                             <!-- 카드 내용을 추가하세요 -->
-                            <div class="card">
-                                <img :src="card.image" alt="카드 이미지" />
-                                <h3>{{ card.title }}</h3>
-                                <p>{{ card.description }}</p>
+                            <div class="card" style="height: 200px;">
+                                <div style="width: 100%; height: 60%;" class="image-box">
+                                    <img :src="card.firstImage" alt="카드 이미지" class="image-thumbnail" />
+                                </div>
+                                <p>{{ card.title }}</p>
+                                <p>{{ card.addr }}</p>
                             </div>
                         </slide>
                     </carousel>
                 </div>
             </div>
-
-
             <div style="margin: 20px 0px;">
                 <div style="display: flex; align-items: baseline;">
                     <div style="display: flex; align-items: baseline;">
                         <h2 style="margin-right: 10px;">후기</h2>
-                        <span>총 {{ x }}건</span>
+                        <span>총 {{ reviews.length }}건</span>
                     </div>
                     <div style="margin-left: auto;">
                         <a href="#" v-b-modal.review>후기 작성하기</a>
@@ -92,23 +106,31 @@
                     </div>
                 </div>
 
-                <div>후기 리스트</div>
-                <!-- <div v-for="(comment, i) in comments" :key="i">
-                    <div style="float: right;">
-                        {{ comment.registerTime }}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
-                            viewBox="0 0 16 16">
-                            <path
-                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                        </svg>
-                    </div>
+                <div style="background-color: rgba(255, 255, 255, 0.9);" v-if="reviews.length !== 0">
+                    <div v-for="(review, i) in reviews" :key="i" style="padding: 15px 0px">
+                        <div class="row" style="display: flex; justify-content: space-between; padding: 0 20px;">
+                            <div style="padding-left: 5px;">
+                                <!-- 작성자 이름 -->
+                                <span>작성자: </span>
+                                <span>{{ review.userNo }}</span>
+                            </div>
+                            <div class="row" style="padding-right: 20px">
+                                <div>
+                                    {{ review.attractionReviewCreate }}
+                                </div>
+                                <div style="margin-left: 5px;">수정</div>
+                                <div style="margin-left: 5px;">삭제</div>
+                            </div>
+                        </div>
 
-                    <div>
-                        {{ comment.userId }}
+                        <div style="padding: 0 10px;">
+                            {{ review.attractionReviewContent }}
+                        </div>
                     </div>
-                    {{ comment.comment }}
-                    <hr>
-                </div> -->
+                </div>
+                <div v-else>
+                    작성된 리뷰가 없습니다. 리뷰를 작성해주세요.
+                </div>
             </div>
         </div>
     </div>
@@ -116,6 +138,7 @@
 
 <script>
 import { Carousel, Slide } from 'vue-carousel';
+import http from "@/api/http";
 
 export default {
     name: 'AttractionDetail',
@@ -126,53 +149,76 @@ export default {
     data() {
         return {
             message: '',
-            cards: [
-                {
-                    id: 1,
-                    image: '이미지 URL',
-                    title: '여행지 이름',
-                    description: '간단한 여행지 설명',
-                },
-                {
-                    id: 2,
-                    image: '이미지 URL',
-                    title: '여행지 이름',
-                    description: '간단한 여행지 설명',
-                },
-                {
-                    id: 3,
-                    image: '이미지 URL',
-                    title: '여행지 이름',
-                    description: '간단한 여행지 설명',
-                },
-                {
-                    id: 4,
-                    image: '이미지 URL',
-                    title: '여행지 이름',
-                    description: '간단한 여행지 설명',
-                },
-                {
-                    id: 5,
-                    image: '이미지 URL',
-                    title: '여행지 이름',
-                    description: '간단한 여행지 설명',
-                },
-                {
-                    id: 6,
-                    image: '이미지 URL',
-                    title: '여행지 이름',
-                    description: '간단한 여행지 설명',
-                },
-                // 다른 카드들도 추가하세요
-            ],
+            attractionDto: Object, // attraction_info 정보있음
+            attractionDesc: Object, // attraction_description 정보있음
+            recommendAttr: [],
+            reviews: [],
         };
     },
-    created() { },
+    created() {
+        console.log(this.$route.params.attrno);
+        // 여행지에 대한 상세정보 불러오기
+        http.get(`/attraction/${this.$route.params.attrno}`).then(({ data }) => {
+            // console.log(data)
+            this.attractionDto = data.attractionDto;
+            this.attractionDesc = data.attractionDesc;
+            // console.log(this.attractionDto)
+            // console.log(this.attractionDesc)
+        })
+
+        // 여행지에 대한 추천 불러오기
+        http.get(`/recommend/${this.$route.params.attrno}`).then(({ data }) => {
+            this.recommendAttr = data.data.recommendAttr
+            console.log(this.recommendAttr);
+        })
+
+        // 댓글 불러오기
+        http.get(`/attraction/${this.$route.params.attrno}/review`).then(({ data }) => {
+            this.reviews = data;
+            console.log(this.reviews)
+        })
+    },
     methods: {},
 };
 </script>
 
+<style>
+.VueCarousel-pagination {
+    display: none !important;
+}
+
+.VueCarousel-navigation-button {
+    font-weight: bolder !important;
+    padding-top: 0px !important;
+    height: 50px !important;
+    font-size: 25pt !important;
+    color: gray !important;
+    opacity: 25% !important;
+}
+</style>
+
 <style scoped>
+.container {
+    width: 500px;
+    overflow: hidden;
+    /* 넘치는 이미지를 가린다 */
+}
+
+.container>img {
+    height: 100%;
+}
+
+.image-box {
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.image-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .contentdetail {
     min-height: 80;
     flex-grow: 1;
