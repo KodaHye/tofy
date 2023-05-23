@@ -123,7 +123,7 @@
                     <div v-if="isWinnerSelected">
                         <p>축하합니다! {{ winner.title }}을(를) 고르셨습니다!</p>
                         <div class="worldcup-content-card"
-                            :style="{ 'background-image': `url(${winner.firstImage})` }"
+                            :style="{ 'background-image': `url(${winner.firstImage === '' ? require('/public/no_image.jpg') : winner.firstImage})` }" 
                             style="margin: auto;"
                         >
                             <div class="destination">{{ winner.title }}</div>
