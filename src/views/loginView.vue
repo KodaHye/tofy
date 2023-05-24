@@ -13,7 +13,7 @@
             <b-row>
                 <b-col style="padding-left: 25px;">Password</b-col>
                 <div class="w-100"></div>
-                <b-col><b-form-input type="password" v-model="member.userPw" placeholder="Enter Password"></b-form-input></b-col>
+                <b-col><b-form-input type="password" v-model="member.userPw" @keyup.enter="confirm()" placeholder="Enter Password"></b-form-input></b-col>
             </b-row>
             <b-row class="text-center" style="padding-top: 50px;">
                 <b-col align-self="center" style="font-size: 20px;">
