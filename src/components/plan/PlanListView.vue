@@ -56,7 +56,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <free-board-list-item v-for="(freeboard, i) in freeboardList" :key="i" :board="board"></free-board-list-item>
+                        <plan-list-item
+                        v-for="(planboard, i) in planList" :key="i" :planboard="planboard">안녕</plan-list-item>
+                        <!-- <free-board-list-item v-for="(freeboard, i) in freeboardList" :key="i" :board="board"></free-board-list-item> -->
                     </tbody>
                 </table>
             </div>
@@ -65,15 +67,27 @@
 </template>
 
 <script>
+
+import http from "@/api/http";
+import PlanListItem from "@/components/plan/PlanListItemView";
+
 export default {
     name: 'PlanList',
-    components: {},
+    components: {
+        PlanListItem,
+    },
     data() {
         return {
             message: '',
+            planList: [],
         };
     },
-    created() {},
+    created() {
+        http.get(`/plan`).then(({ data }) => {
+            this.planList = data;
+            console.log(this.planList);
+        })
+    },
     methods: {},
 };
 </script>

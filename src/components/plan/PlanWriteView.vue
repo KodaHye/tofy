@@ -10,8 +10,8 @@
 
             <div class="mb-3">
                 <label for="subject" class="form-label">제목 : </label>
-                <input type="text" class="form-control" id="subject" name="subject" placeholder="제목..." />
-                <!-- <input type="text" class="form-control" id="subject" name="subject" placeholder="제목..." v-model="subject" /> -->
+                <!-- <input type="text" class="form-control" id="subject" name="subject" placeholder="제목..." /> -->
+                <input type="text" class="form-control" id="subject" name="subject" placeholder="제목..." v-model="title" />
             </div>
 
             <div class="row" style="margin: 20px 0px;">
@@ -74,7 +74,7 @@
                     <div class="container" style="overflow: auto; height: 500px;">
                         <table id="attractions" class="table table-striped align-middle">
                             <draggable v-model="attractionPlanList">
-                            <tr v-for="attraction in this.attractionPlanList" :key="attraction.contentId"
+                                <tr v-for="attraction in this.attractionPlanList" :key="attraction.contentId"
                                     @click="addPlan(attraction.contentId);">
                                     <!-- @click="addPlan(attraction.contentId); moveCenter(attraction.latitude, attraction.longitude);"> -->
 
@@ -82,8 +82,8 @@
                                     <td style="width: 300px">{{ attraction.title }}</td>
                                     <!-- <td><button @click="buttonClicked(area.contentId)">추가</button></td> -->
                                     <!-- <td><input type="hidden" :name="attraction.contentId" :value="attraction.contentId"></td> -->
-                            </tr>
-                        </draggable>
+                                </tr>
+                            </draggable>
                         </table>
 
                     </div>
@@ -125,7 +125,8 @@
                     <div style="padding-right: 7px;">
                         <!-- <button type="button" id="btn-register" class="btn btn-outline-primary"
                             @click="writeBoard">글작성</button> -->
-                        <button type="button" id="btn-register" class="btn btn-outline-primary" @click="submitPlan">글작성</button>
+                        <button type="button" id="btn-register" class="btn btn-outline-primary"
+                            @click="submitPlan">글작성</button>
                     </div>
                     <div>
                         <button type="reset" class="btn btn-outline-danger">초기화</button>
@@ -152,6 +153,7 @@ export default {
         return {
             map: null,
             keyword: "",
+            markers: [],
             mapContainer: {},
             mapOption: {},
             positions: [],
@@ -167,12 +169,21 @@ export default {
     },
     created() { },
     methods: {
+        moveCenter(lat, lng) {
+            this.map.setCenter(new kakao.maps.LatLng(lat, lng));
+        },
+        displayMarker() {
+            // 기존의 마커를 삭제합니다
+            console.log("마커 생성!")
+        },
         submitPlan() {
             this.plan.title = this.title;
             this.plan.content = this.content;
-            this.plan.attractionPlanList = this.attractionList;
+            this.plan.attractionPlanList = this.attractionPlanList;
+            this.plan.startDate = this.startDate;
+            this.plan.endDate = this.endDate;
 
-            console.log(this.attractionPlanList)
+            console.log(this.plan)
         },
         getAttractions() {
 
@@ -213,6 +224,8 @@ export default {
                 addr1: data.attractionDto.addr1,
                 addr2: data.attractionDto.addr2
             });
+
+            this.displayMarker();
         },
         addPlan(contentId) {
 
@@ -274,8 +287,13 @@ export default {
             //카카오 객체가 있고, 카카오 맵을 그릴 준비가 되어 있다면 맵 실행
             this.loadMap();
         } else {
+            const script = document.createElement("script");
             //없다면 카카오 스크립트 추가 후 맵 실행
             this.loadScript();
+            /* global kakao */
+            script.onload = () => kakao.maps.load(this.initMap);
+            script.src = "SERVICE_KEY";
+            document.head.appendChild(script);
         }
     },
 };

@@ -17,7 +17,6 @@
                             </span>
                         </div>
                     </div>
-
                 </div>
                 <hr>
 
@@ -110,9 +109,10 @@ export default {
             console.log(comm);
             
             http.post(`/freeboard/${this.$route.params.boardno}/comment`, comm);
-            // this.$router.push({ name: 'freeboardDetail', params: { boardno:  this.$route.params.boardno }})
-            // this.$router.reload();
+            this.$router.push({ name: 'freeboardDetail', params: { boardno:  this.$route.params.boardno }})
             // 화면 reload하게 해야 됨
+            this.$router.go();
+             
         }
     },
     computed: {
