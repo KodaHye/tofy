@@ -46,10 +46,12 @@ export default {
         selectTag(tag) {
             if (this.selectedTags.includes(tag.tagNm)) {
                 this.selectedTags = this.selectedTags.filter(t => t !== tag.tagNm);
+                this.$emit('selectTag', tag);
             } else {
                 if (this.selectedTags.length < 5) {
                     //배열에 저장
                     this.selectedTags.push(tag.tagNm);
+                    this.$emit('selectTag', tag);
                     
                 } else {
                     alert('최대 5개의 태그까지만 선택 가능합니다.');
@@ -57,9 +59,8 @@ export default {
             }
             
             //상위 컴포넌트에 해당 태그 객체 보내기
-            if (this.selectedTags.length < 5) {
-                this.$emit('selectTag', tag);
-            }
+            // if (this.selectedTags.length < 5) {
+            // }
         }
     }
 }
