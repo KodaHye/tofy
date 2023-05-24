@@ -56,7 +56,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <free-board-list-item v-for="(freeboard, i) in freeboardList" :key="i" :board="board"></free-board-list-item>
+                        <notice-list-item v-for="(board, i) in noticeList" :key="i" :board="board"></notice-list-item>
+                        <!-- <free-board-list-item v-for="(board, i) in noticeList" :key="i" :board="board"></free-board-list-item> -->
                     </tbody>
                 </table>
             </div>
@@ -66,15 +67,34 @@
 
 <script>
 
+import http from "@/api/http";
+// import FreeBoardListItem from "@/components/freeboard/FreeBoardListItemView";
+import NoticeListItem from "@/components/notice/NoticeListItemView";
+
+// import { getNoticeList } from '@/api/notice';
+
 export default {
     name: 'NoticeView',
-    components: {},
+    components: {
+        // FreeBoardListItem,
+        NoticeListItem,
+    },
     data() {
         return {
+            noticeList: [],
         };
     },
     created() {
-
+        // getNoticeList(
+        //     data => {
+        //         console.log(data)
+        //     }, err => {
+        //         console.log(err)
+        //     }
+        // )
+        http.get('/notice').then(({data}) => {
+            this.noticeList = data;
+        })
      },
     methods: {},
 };
