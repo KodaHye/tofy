@@ -8,7 +8,7 @@
                 <b-row style="height: 100%; width: 100%; margin: 0;">
                     <!--이미지 section start-->
                     <b-col cols="3" style="height: 100%; width: 100%; border: solid;">
-                        <img src="/public/test1.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="require(`./public/test1.jpg`)" alt="" style="width: 100%; height: 100%; object-fit: cover;">
                     </b-col>
                     <!--이미지 section end-->
                     <!--설명 section start-->

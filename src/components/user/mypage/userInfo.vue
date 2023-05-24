@@ -5,7 +5,7 @@
                 <b-row>
                     <b-col class="text-item">사용자명</b-col>
                     <div class="w-100"  style="margin-top: 7px;"></div>
-                    <b-col><b-form-input readonly value="ssafy">ssafy</b-form-input></b-col>
+                    <b-col><b-form-input readonly :value="this.userInfo.userId">ssafy</b-form-input></b-col>
                     <div class="w-100"></div>
                     <b-col><b-form-input placeholder="Name"></b-form-input></b-col>
                 </b-row>
@@ -16,7 +16,7 @@
                 <b-row>
                     <b-col class="text-item">비밀번호</b-col>
                     <div class="w-100"  style="margin-top: 7px;"></div>
-                    <b-col><b-form-input :type="password" readonly value="12345678"></b-form-input></b-col>
+                    <b-col><b-form-input :type="password" readonly :value="this.userInfo.userPw"></b-form-input></b-col>
                     <div class="w-100"></div>
                     <b-col><b-form-input placeholder="password"></b-form-input></b-col>
                 </b-row>
@@ -27,7 +27,7 @@
                 <b-row>
                     <b-col>이메일</b-col>
                     <div class="w-100"></div>
-                    <b-col><b-form-input readonly value="ssafy@ssafy.com"></b-form-input></b-col>
+                    <b-col><b-form-input readonly :value="this.userInfo.emailId  +'@' + this.userInfo.emailDomain"></b-form-input></b-col>
                     <div class="w-100"></div>
                     <b-col>
                         <!--email 입력-->
@@ -51,6 +51,10 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
+const userStore = "userStore";
+
 export default {
     name: 'UserInfoForm',
     data() {
@@ -61,6 +65,9 @@ export default {
             emailDomain: '',
             options: ["ssafy.com", "naver.com", "gmail.com", "daum.net"]
         };
+    },
+    computed: {
+        ...mapState(userStore, ["isLogin", "isLoginError", "userInfo"]),
     },
     methods: {
         submitForm() {
