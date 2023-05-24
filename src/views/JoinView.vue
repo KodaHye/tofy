@@ -27,7 +27,7 @@
         <b-col style="padding-left: 20px; margin-bottom: 5px;">Password</b-col>
         <div class="w-100"></div>
         <b-col>
-          <b-form-input :id="`type-${type}`" :type="password" v-model="userPw" :class="{ 'is-invalid': isPwInvalid }"
+          <b-form-input :id="`type-${type}`" type="password" v-model="userPw" :class="{ 'is-invalid': isPwInvalid }"
             placeholder="Enter Password"></b-form-input>
         </b-col>
         <div class="invalid-feedback" v-if="isPwInvalid">
@@ -39,7 +39,7 @@
         <b-col style="padding-left: 20px; margin-bottom: 5px;">비밀번호 확인</b-col>
         <div class="w-100"></div>
         <b-col>
-          <b-form-input v-model="userPwCheck" placeholder="Enter Password One More"
+          <b-form-input type="password" v-model="userPwCheck" placeholder="Enter Password One More"
             :class="{ 'is-invalid': isPwCheckInvalid }"></b-form-input>
         </b-col>
         <div class="invalid-feedback" v-if="isPwCheckInvalid">
