@@ -1,7 +1,7 @@
 <template>
     <div class="box">
         <div class="square">
-            <b-row style="height: 60vh; overflow: scroll;">
+            <b-row style="height: 60vh;">
                 <!--사이드 바-->
                 <b-col cols="3" style="height: 100%; border-right: solid; position: sticky;">
                     <b-row style="margin-top: 30px;">
@@ -13,7 +13,7 @@
                     </b-row>
                 </b-col>
                 <!--컴포넌트 (개인정보, 태그 수정, 우승 여행지 목록)-->
-                <b-col style="height: 100%; overflow: scroll;">
+                <b-col style="height: 100%; overflow: auto;">
                     <b-row>
                         <b-col style="font-size: 30px; text-align: center;">{{names}}</b-col>
                         <div class="w-100" style="height: 30px;"></div>
