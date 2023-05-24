@@ -53,7 +53,6 @@ export default {
     },
     methods: {
         writeFreeBoard() {
-            console.log(">> ")
             console.log(this.userInfo)
             this.freeboard.userNo = this.userInfo.userNo
 
