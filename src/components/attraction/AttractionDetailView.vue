@@ -10,20 +10,17 @@
                             대한
                             상세정보입니다.</span>
                     </div>
+                    
                     <div class="col-4" style="text-align: right;">
-                        평균별점: {{ rate }}
+                        <div v-if="rate === 0 && reviews.length == 0">
+                            등록된 후기가 없는 관광지입니다.
+                        </div>
+                        <div v-else>
+                            평균별점: {{ rate }}
+                        </div>
                     </div>
                     <div class="star-ratings">
-	<div 
-    class="star-ratings-fill space-x-2 text-lg"
-    :style="{ width: ratingToPercent + '%' }"
-	>
-		<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-	</div>
-	<div class="star-ratings-base space-x-2 text-lg">
-		<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-	</div>
-</div>
+                    </div>
                 </div>
             </div>
 
@@ -55,7 +52,7 @@
 
             <div style="margin: 20px 0px 60px 0px;">
                 <div>
-                    <div class = "row" style="padding-left: 15px; display: flex; align-items: baseline;" >
+                    <div class="row" style="padding-left: 15px; display: flex; align-items: baseline;">
                         <h2 style="padding-right: 10px;">가볼만한 여행지 추천</h2>
                         <span style="">top 10</span>
                     </div>
@@ -84,60 +81,38 @@
                     </carousel>
                 </div>
             </div>
-            <div style="margin: 20px 0px;">
+            <div style="margin: 0px 0px 20px">
                 <div style="display: flex; align-items: baseline;">
                     <div style="display: flex; align-items: baseline;">
                         <h2 style="margin-right: 10px;">후기</h2>
                         <span>총 {{ reviews.length }}건</span>
                     </div>
                     <div style="margin-left: auto;">
-                        <a href="#" v-b-modal.review>후기 작성하기</a>
-
-                        <b-modal id="review" title="BootstrapVue">
-                            <template #modal-title>
-                                <h2>관광지이름</h2>
-                            </template>
-                            <!-- https://melthleeth.tistory.com/entry/HTML-CSS%EB%A1%9C-%EB%B3%84%EC%B0%8D%EA%B8%B0-Star-Rating -->
-
-                            <div class="star-rating space-x-4 mx-auto" style="margin-bottom: 10px;">
-                                <input type="radio" id="5-stars" name="rating" value="5" v-model="ratings" />
-                                <label for="5-stars" class="star pr-4">★</label>
-                                <input type="radio" id="4-stars" name="rating" value="4" v-model="ratings" />
-                                <label for="4-stars" class="star">★</label>
-                                <input type="radio" id="3-stars" name="rating" value="3" v-model="ratings" />
-                                <label for="3-stars" class="star">★</label>
-                                <input type="radio" id="2-stars" name="rating" value="2" v-model="ratings" />
-                                <label for="2-stars" class="star">★</label>
-                                <input type="radio" id="1-star" name="rating" value="1" v-model="ratings" />
-                                <label for="1-star" class="star">★</label>
-                            </div>
-                            <div style="margin-bottom: 10px;">
-                                관광지의 후기를 등록해주세요.
-                                <b-form-textarea id="textarea" v-model="text" placeholder="후기를 작성해주세요." rows="3"
-                                    max-rows="3"></b-form-textarea>
-                            </div>
-
-                            <!-- https://bootstrap-vue.org/docs/components/form-file#multiple-files -->
-                            <div>이미지 업로드</div>
-                            <b-form-file multiple :file-name-formatter="formatNames"></b-form-file>
-
-                        </b-modal>
+                        <a href="#" v-b-modal.review style="color: black;">후기 작성하기</a>
+                        
+                        <!-- Modal -->
+                        <attraction-review-modal @sendReveiwData="writeReview"></attraction-review-modal>
+                 
                     </div>
                 </div>
 
                 <div style="background-color: rgba(255, 255, 255, 0.9);" v-if="reviews.length !== 0">
                     <div v-for="(review, i) in reviews" :key="i" style="padding: 15px 0px">
                         <div class="row" style="display: flex; padding-left:25px;">
-                            <div style="padding-left: 5px;" class="col-2">
+                            <div style="padding-left: 15px;" class="col-2 row">
                                 <!-- 작성자 이름 -->
-                                <span>작성자: </span>
-                                <span>{{ review.userNo }}</span>
+                                <div>
+                                    <img class="avatar me-2 float-md-start bg-light p-2"
+                                src="https://raw.githubusercontent.com/twbs/icons/main/icons/person-fill.svg" />
+                                </div>
+                                <div><span>{{ review.user.userNm }}</span></div>
+                                
                             </div>
-                            <div style="padding-left: 5px;" class="col-2">
+
+                            <div class="col-2">
                                 <!-- 작성자 이름 -->
                                 <span>별점: </span>
-                                <span>{{ rate | ratingToPercent}}</span>
-
+                                <span>{{ review.attractionReviewScore }}</span>
                             </div>
                             <div class="row col-8" style="text-align: right; display: flex; justify-content: flex-end;">
                                 <div>
@@ -165,18 +140,26 @@
 <script>
 import { Carousel, Slide } from 'vue-carousel';
 import http from "@/api/http";
+import AttractionReviewModal from "@/components/attraction/AttractionReviewModal"
+import { mapState } from "vuex";
+
+const userStore = "userStore";
 
 export default {
     name: 'AttractionDetail',
     components: {
+        AttractionReviewModal,
         Carousel,
         Slide,
     },
+    props: {
+
+    }, 
     data() {
         return {
             message: '',
-            attractionDto: Object, // attraction_info 정보있음
-            attractionDesc: Object, // attraction_description 정보있음
+            attractionDto: {}, // attraction_info 정보있음
+            attractionDesc: {}, // attraction_description 정보있음
             recommendAttr: [],
             reviews: [],
             rate: Number,
@@ -186,7 +169,8 @@ export default {
 
         // 별점 보이기
         http.get(`/attraction/rate/${this.$route.params.attrno}`).then(({ data }) => {
-            if (data == null) this.rate = 0;
+            console.log(this.data)
+            if (data.length === 0) this.rate = 0;
             else {
                 // rate에 맞게 별점 보이기
                 this.rate = data.rate;
@@ -213,15 +197,38 @@ export default {
             this.reviews = data;
             console.log(this.reviews)
         })
-        
+
     },
-    methods: {},
+    methods: {
+        clickCard() {
+            console.log("선택")  
+        }, 
+        writeReview(review) {
+            // "attractionReviewContent": "리뷰 Post Man으로 작성",
+            // "attractionReviewScore": "3",
+            // "attractionReviewImg": ""
+            var tmpReview = {
+                userNo: this.userInfo.userNo,
+                attractionReviewContent: review.text,
+                attractionReviewScore: review.ratings,
+                attractionReviewImg: "",
+            }
+
+            // axios에서 post 로 데이터 입력
+            // http://localhost:9999/tofy/attraction/126108/review
+            http.post(`/attraction/${this.$route.params.attrno}/review`, tmpReview);
+            this.$router.go();
+        }
+    },
     filters: {
         ratingToPercent(rate) {
             const score = + rate - 10;
             return score;
         }
     }
+    , computed: {
+		...mapState(userStore, ["userInfo"]),
+    },
 };
 </script>
 
@@ -269,7 +276,7 @@ export default {
     max-width: 80vw;
     padding: 30px 18px 43px;
     border-radius: 20px;
-    /* background-color: #fff; */
+    background-color: none;
 }
 
 /* 카드 스타일을 추가하세요 */
@@ -284,63 +291,5 @@ export default {
 .card>p {
     margin: 0px;
 }
-.star-ratings {
-  color: #aaa9a9; 
-  position: relative;
-  unicode-bidi: bidi-override;
-  width: max-content;
-  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
-  -webkit-text-stroke-width: 1.3px;
-  -webkit-text-stroke-color: #2b2a29;
-}
 
-.star-rating {
-    display: flex;
-    flex-direction: row-reverse;
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-    justify-content: space-around;
-    padding: 0 0.2em;
-    text-align: center;
-    width: 5em;
-    -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
-    -webkit-text-stroke-width: 1.3px;
-    -webkit-text-stroke-color: #2b2a29;
-}
-
-.star-ratings-fill {
-    color: #fff58c;
-    padding: 0;
-    position: absolute;
-    z-index: 1;
-    display: flex;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    -webkit-text-fill-color: gold;
-}
-
-.star-ratings-base {
-    z-index: 0;
-    padding: 0;
-}
-.star-rating input {
-    display: none;
-}
-
-.star-rating label {
-    -webkit-text-fill-color: transparent;
-    /* Will override color (regardless of order) */
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: #2b2a29;
-    cursor: pointer;
-}
-
-.star-rating :checked~label {
-    -webkit-text-fill-color: gold;
-}
-
-.star {
-    padding-right: 5px;
-}
 </style>
