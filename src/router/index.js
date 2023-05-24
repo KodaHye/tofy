@@ -19,8 +19,8 @@ const onlyAuthUser = async (to, from, next) => {
   if (!checkToken || checkUserInfo === null) {
     alert("로그인이 필요합니다.");
     // next({ name: "login" });
-    router.push({ name: "login" }).catch(error => {
-      if (error.name !== 'NavigationDuplicated') {
+    router.push({ name: "login" }).catch((error) => {
+      if (error.name !== "NavigationDuplicated") {
         throw error;
       }
     });
@@ -30,169 +30,173 @@ const onlyAuthUser = async (to, from, next) => {
   }
 };
 
-
-
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: "/",
+    name: "home",
+    component: HomeView,
   },
   {
-    path:'/test',
-    name: 'test',
-    component: () => import('@/views/TestAosView.vue')
+    path: "/test",
+    name: "test",
+    component: () => import("@/views/TestAosView.vue"),
   },
   {
-    path: '/login',
-    name: 'login',
+    path: "/login",
+    name: "login",
     component: () => import("@/views/loginView.vue"),
   },
   {
-    path: '/join',
-    name: 'join',
-    component: () => import("@/views/JoinView.vue")
+    path: "/join",
+    name: "join",
+    component: () => import("@/views/JoinView.vue"),
   },
   {
-    path: '/selectTag',
-    name: 'selectTag',
-    component: () => import("@/views/JoinSelectTagView")
+    path: "/selectTag",
+    name: "selectTag",
+    component: () => import("@/views/JoinSelectTagView"),
   },
   {
-    path: '/mypage',
-    name: 'myPage',
+    path: "/mypage",
+    name: "myPage",
     component: () => import("@/views/MypageView.vue"),
     children: [
       {
-        path: 'userInfo',
-        name: 'userInfo',
-        component: () => import('@/components/user/mypage/UserInfo')
+        path: "userInfo",
+        name: "userInfo",
+        component: () => import("@/components/user/mypage/UserInfo"),
       },
       {
-        path: 'tag',
-        name: 'userTag',
-        component: () => import('@/components/tag/TagItems')
+        path: "tag",
+        name: "userTag",
+        component: () => import("@/components/tag/TagItems"),
       },
       {
-        path: 'worldcupList',
-        name: 'worldcupList',
-        component: () => import('@/components/user/mypage/UserWorldCupWinner')
-      }
-    ]
+        path: "worldcupList",
+        name: "worldcupList",
+        component: () => import("@/components/user/mypage/UserWorldCupWinner"),
+      },
+    ],
   },
   {
-    path: '/worldcup',
-    name: 'worldcup',
+    path: "/worldcup",
+    name: "worldcup",
     beforeEnter: onlyAuthUser,
     component: () => import("@/views/AttractionWorldCupView.vue"),
   },
   {
-    path: '/freeboard',
-    name: 'freeboard',
+    path: "/freeboard",
+    name: "freeboard",
     redirect: "/freeboard/list",
     beforeEnter: onlyAuthUser,
     component: () => import("@/views/FreeBoardView"),
     children: [
       {
-        path: 'list',
-        name: 'freeboardList',
+        path: "list",
+        name: "freeboardList",
         component: () => import("@/components/freeboard/FreeBoardListView"),
       },
       {
-        path: 'write',
-        name: 'freeboardWrite',
+        path: "write",
+        name: "freeboardWrite",
         component: () => import("@/components/freeboard/FreeBoardWriteView"),
       },
       {
-        path: 'modify/:boardno',
-        name: 'freeboardModify',
+        path: "modify/:boardno",
+        name: "freeboardModify",
         component: () => import("@/components/freeboard/FreeBoardModifyView"),
       },
       {
-        path: 'detail/:boardno',
-        name: 'freeboardDetail',
+        path: "detail/:boardno",
+        name: "freeboardDetail",
         component: () => import("@/components/freeboard/FreeBoardDetailView"),
       },
       {
-        path: 'delete/:boardno',
-        name: 'freeboardDelete',
+        path: "delete/:boardno",
+        name: "freeboardDelete",
         component: () => import("@/components/freeboard/FreeBoardDeleteView"),
-      }
-    ]
-  }, 
+      },
+    ],
+  },
   {
-    path: '/notice',
-    name: 'notice',
+    path: "/notice",
+    name: "notice",
     redirect: "/notice/list",
     component: () => import("@/views/NoticeView"),
     children: [
       {
-        path: 'list',
-        name: 'noticeList',
+        path: "list",
+        name: "noticeList",
         component: () => import("@/components/notice/NoticeListView"),
       },
       {
-        path: 'write',
-        name: 'noticeWrite',
+        path: "write",
+        name: "noticeWrite",
         component: () => import("@/components/notice/NoticeWriteView"),
-      }
-    ]
-  }, 
+      },
+    ],
+  },
   {
-    path: '/plan',
-    name: 'plan',
+    path: "/plan",
+    name: "plan",
     redirect: "/plan/list",
     beforeEnter: onlyAuthUser,
     component: () => import("@/views/PlanView"),
     children: [
       {
-        path: 'list',
-        name: 'planList',
+        path: "list",
+        name: "planList",
         component: () => import("@/components/plan/PlanListView"),
       },
       {
-        path: 'write',
-        name: 'planWrite',
+        path: "write",
+        name: "planWrite",
         component: () => import("@/components/plan/PlanWriteView"),
       },
-    ]
-  }, 
+    ],
+  },
   {
-    path: '/attraction',
-    name: 'attraction',
+    path: "/attraction",
+    name: "attraction",
     redirect: "/attraction/search",
     beforeEnter: onlyAuthUser,
     component: () => import("@/views/AttractionView"),
     children: [
       {
-        path: 'search',
-        name: 'attractionSearch',
+        path: "search",
+        name: "attractionSearch",
         component: () => import("@/components/attraction/AttractionSearchView"),
       },
       {
-        path: 'detail/:attrno',
-        name: 'attractionDetail',
+        path: "detail/:attrno",
+        name: "attractionDetail",
         component: () => import("@/components/attraction/AttractionDetailView"),
       },
-    ]
-  }, 
-]
+    ],
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-// router.beforeEach((to, from, next) => {
-//   if (to.path === '/') {
-//   // '/' 경로일 때만 fullpage.min.js 파일 동적으로 로드
-//   const script = document.createElement('script')
-//   script.src = '/fullpage.min.js'
-//   document.head.appendChild(script)
-//   }
+router.beforeEach((to, from, next) => {
+  if (to.path === '/selectTag' && from.path === '/') {
+    alert("잘못된 요청입니다.");
+    next({name : 'home'});
+  }
+  else if (from.path === '/selectTag') {
+    if (to.path === '/') {next()}
+    else if (window.confirm("이 창을 벗어날 경우 기존 입력이 초기화 됩니다. 나가시겠습니까?")) {
+      next();
+    } else {
+      next(false);
+    }
+  } else {
+    next();
+  }
+});
 
-//   next()
-//   })
-
-export default router
+export default router;

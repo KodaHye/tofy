@@ -106,7 +106,7 @@ export default {
         };
     },
     created() {
-        fetch('http://192.168.208.73:9999/tofy/attraction/sido')
+        fetch('http://localhost:9999/tofy/attraction/sido')
             .then(response => response.json())
             .then(data => {
                 // <select> 태그의 <option> 데이터 업데이트
@@ -150,7 +150,7 @@ export default {
         },
 
         getGugun() {
-            axios.get(`http://192.168.208.73:9999/tofy/attraction/gugun/${this.sidoCode}`)
+            axios.get(`http://localhost:9999/tofy/attraction/gugun/${this.sidoCode}`)
                 .then(res => {
                     // <select> 태그의 <option> 데이터 업데이트
                     const selectTag = document.getElementById("regionDetail");
@@ -189,7 +189,7 @@ export default {
                 type: this.type
             }
 
-            axios.post(`http://192.168.208.73:9999/tofy/attraction/map`, attractionInfo)
+            axios.post(`http://localhost:9999/tofy/attraction/map`, attractionInfo)
                 .then(res => {
                     console.log("결과 : " + res[0]);
                     this.makeList(res.data);

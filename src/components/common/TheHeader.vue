@@ -24,8 +24,8 @@
 						<!-- <b-dropdown-item href="#" @click="signin" v-b-modal.signin>회원가입</b-dropdown-item> -->
 						<!--로그인 상태-->
 						<div v-if="userInfo">
-							<b-drop-item href="#" @click="$router.push('/mypage')">마이페이지</b-drop-item>
-							<b-drop-item href="#" @click="onClickLogout">로그아웃</b-drop-item>
+							<b-dropdown-item href="#" @click="$router.push('/mypage')">마이페이지</b-dropdown-item>
+							<b-dropdown-item href="#" @click="onClickLogout">로그아웃</b-dropdown-item>
 						</div>
 						<!--로그아웃 상태-->
 						<div v-else>
@@ -73,6 +73,7 @@ export default {
 			this.userLogout(this.userInfo.userid);
 			sessionStorage.removeItem("access-token"); //저장된 토큰 없애기
 			sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
+			alert("로그아웃 되었습니다.");
 			if (this.$route.path != "/") this.$router.push({ name: "home" });
 		},
 	},

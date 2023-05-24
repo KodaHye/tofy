@@ -72,7 +72,10 @@ export default {
     border-radius: 20px;
     background-color: #fff;
     margin-top: 10vh;
-
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    animation-name: fadeIn;
+    animation-duration: 2s;
+    animation-fill-mode: both;
 }
 
 .login-btn {
@@ -104,6 +107,16 @@ export default {
 
     100% {
         color: rgb(106, 106, 106);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }
 </style>

@@ -2,8 +2,8 @@
     <b-col align-self="center" style="align-items: center;">
         <b-row style="align-items: center;" v-for="(row, rowIndex) in groupedTags" :key="rowIndex" class="tag-row">
             <b-col v-for="(tag, index) in row" :key="index" style="text-align: center;">
-                <button :class="{ 'tag-selected': selectedTags.includes(tag) }" @click="selectTag(tag)" class="tag-button">
-                    {{ tag }}
+                <button :class="{ 'tag-selected': selectedTags.includes(tag.tagNm) }" @click="selectTag(tag)" class="tag-button">
+                    {{ tag.tagNm }}
                 </button>
             </b-col>
         </b-row>
@@ -11,13 +11,27 @@
 </template>
 
 <script>
+import { getAllTags } from '@/api/tag';
+
 export default {
     name: 'TagItems',
     data() {
         return {
-            tags: ['#태그1', '#태그2', '#태그3', '#태그4', '#태그5', '태그6', '태그7', '태그8', '태그9', '태그10', '태그11', '태그12', '태그13', '태그14', '태그15', '태그16', '태그17', '태그18', '태그19', '태그20'],
+            tags: [],
             selectedTags: []
         }
+    },
+    created() {
+        getAllTags(
+            res => {
+                console.log("태그", res.data);
+                this.tags = res.data.data.tags;
+                console.log("데이터 들어간 후", this.tags);
+            },
+            err => {
+                console.log(err);
+            }
+        )
     },
     computed: {
         groupedTags() {
@@ -30,16 +44,22 @@ export default {
     },
     methods: {
         selectTag(tag) {
-            if (this.selectedTags.includes(tag)) {
-                this.selectedTags = this.selectedTags.filter(t => t !== tag);
+            if (this.selectedTags.includes(tag.tagNm)) {
+                this.selectedTags = this.selectedTags.filter(t => t !== tag.tagNm);
             } else {
                 if (this.selectedTags.length < 5) {
-                    this.selectedTags.push(tag);
+                    //배열에 저장
+                    this.selectedTags.push(tag.tagNm);
+                    
                 } else {
                     alert('최대 5개의 태그까지만 선택 가능합니다.');
                 }
             }
-            console.log(this.selectedTags);
+            
+            //상위 컴포넌트에 해당 태그 객체 보내기
+            if (this.selectedTags.length < 5) {
+                this.$emit('selectTag', tag);
+            }
         }
     }
 }
@@ -71,7 +91,6 @@ export default {
 
 .tag-button:hover {
     transform: scale(1.1);
-    /* 마우스 오버시 10% 확대 */
 }
 
 .tag-selected {
