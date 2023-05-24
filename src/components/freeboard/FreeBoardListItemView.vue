@@ -6,7 +6,7 @@
                 {{ freeboard.freeBoardTitle }}
             </router-link>
         </td>
-        <td>{{ freeboard.userNo }}</td>
+        <td>{{ freeboard.user.userNm }}</td>
         <td>{{ freeboard.freeBoardHit }}</td>
         <td>{{ freeboard.freeBoardCreate }}</td>
     </tr>

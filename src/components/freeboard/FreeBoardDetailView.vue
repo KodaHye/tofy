@@ -11,14 +11,12 @@
                         <div class="clearfix align-content-center">
                             <!-- 사용자 이미지도 불러오도록 -->
                             <img class="avatar me-2 float-md-start bg-light p-2"
-                                src="https://raw.githubusercontent.com/twbs/icons/main/icons/person-fill.svg" /><span
-                                class="fw-bold">{{
-                                    board.userNo }}</span>
+                                src="https://raw.githubusercontent.com/twbs/icons/main/icons/person-fill.svg" />
+                                <span class="fw-bold">{{ board.user.userNm }}</span>
                             <span class="text-secondary fw-light"> {{ board.freeBoardCreate }} 조회 : {{ board.freeBoardHit }}
                             </span>
                         </div>
                     </div>
-
                 </div>
                 <hr>
 
@@ -58,10 +56,10 @@
                 <comment-list-item v-for="(comment, i) in commentList" :key="i" :comment="comment"></comment-list-item>
 
                 <div class="row" style="margin-top: 10px; padding: 0px 15px;">
-                    <b-form-textarea id="textarea" placeholder="댓글을 입력해주세요." rows="3" max-rows="3"></b-form-textarea>
+                    <b-form-textarea id="textarea" placeholder="댓글을 입력해주세요." rows="3" max-rows="3" v-model="freeboardComment"></b-form-textarea>
                 </div>
                 <div style="float: right; padding: 12px 0px;">
-                    <b-button variant="light" size="sm" @click="comment">댓글 등록</b-button>
+                    <b-button variant="light" size="sm" @click="writefreeboardComment">댓글 등록</b-button>
                 </div>
             </div>
 
@@ -74,6 +72,9 @@
 <script>
 import http from "@/api/http";
 import CommentListItem from "@/components/freeboard/CommentItem.vue"
+import { mapState } from "vuex";
+
+const userStore = "userStore";
 
 export default {
     name: 'FreeBoardDetail',
@@ -84,6 +85,7 @@ export default {
         return {
             board: Object,
             message: '',
+            freeboardComment: '',
             commentList: [],
         };
     },
@@ -97,7 +99,25 @@ export default {
             console.log(this.commentList);
         })
     },
-    methods: {},
+    methods: {
+        writefreeboardComment() {
+            var comm = {
+                userNo: this.userInfo.userNo,
+                boardNo: this.$route.params.boardno,
+                commentContent: this.freeboardComment,
+            }
+            console.log(comm);
+            
+            http.post(`/freeboard/${this.$route.params.boardno}/comment`, comm);
+            this.$router.push({ name: 'freeboardDetail', params: { boardno:  this.$route.params.boardno }})
+            // 화면 reload하게 해야 됨
+            this.$router.go();
+             
+        }
+    },
+    computed: {
+		...mapState(userStore, ["userInfo"]),
+    },
 };
 </script>
 

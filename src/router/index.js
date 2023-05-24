@@ -153,8 +153,13 @@ const routes = [
         name: "planWrite",
         component: () => import("@/components/plan/PlanWriteView"),
       },
-    ],
-  },
+      {
+        path: 'planDetail/:boardno',
+        name: 'planDetail',
+        component: () => import("@/components/plan/PlanDetailView"),
+      },
+    ]
+  }, 
   {
     path: "/attraction",
     name: "attraction",

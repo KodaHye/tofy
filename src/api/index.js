@@ -11,6 +11,16 @@ function apiInstance() {
   return instance;
 }
 
+function noticeInstance() {
+  const instance = axios.create({
+    baseURL: process.env.VUE_APP_API_NOTICE_URL,
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+  });
+  return instance;
+}
+
 function worldCupInstance() {
   const instance = axios.create({
     baseURL: process.env.VUE_APP_API_WORLDCUP_URL,
@@ -21,4 +31,4 @@ function worldCupInstance() {
   return instance;
 }
 
-export { apiInstance, worldCupInstance};
+export { apiInstance, noticeInstance, worldCupInstance};

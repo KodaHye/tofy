@@ -11,8 +11,19 @@
                             상세정보입니다.</span>
                     </div>
                     <div class="col-4" style="text-align: right;">
-                        평균별점: {{ }}
+                        평균별점: {{ rate }}
                     </div>
+                    <div class="star-ratings">
+	<div 
+    class="star-ratings-fill space-x-2 text-lg"
+    :style="{ width: ratingToPercent + '%' }"
+	>
+		<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+	</div>
+	<div class="star-ratings-base space-x-2 text-lg">
+		<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+	</div>
+</div>
                 </div>
             </div>
 
@@ -26,18 +37,18 @@
 
                 <div style="margin-bottom: 20px;">
                     <div style="margin-bottom: 15px;">
-                        <span style="font-weight: bold;">주소</span><br>
+                        <span style="font-weight: bold; margin-right: 5px; font-size: 15pt;">주소</span><br>
                         <span>{{ attractionDto.addr }}</span>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <span style="font-weight: bold;">상세 주소 </span><br>
+                        <span style="font-weight: bold; margin-right: 5px; font-size: 15pt;">상세 주소 </span><br>
                         <span v-if="attractionDto.addr2">{{ attractionDto.addr2 }}</span>
                         <span v-else>상세주소 없음</span>
                     </div>
                 </div>
 
                 <div>
-                    <span style="font-weight: bold;">설명</span><br>
+                    <span style="font-weight: bold; margin-right: 5px; font-size: 15pt;">설명</span><br>
                     <span>{{ attractionDesc.desc }}</span>
                 </div>
             </div>
@@ -125,15 +136,15 @@
                             <div style="padding-left: 5px;" class="col-2">
                                 <!-- 작성자 이름 -->
                                 <span>별점: </span>
-                                <span>{{ review.attractionReviewScore }}</span>
+                                <span>{{ rate | ratingToPercent}}</span>
 
                             </div>
                             <div class="row col-8" style="text-align: right; display: flex; justify-content: flex-end;">
                                 <div>
                                     {{ review.attractionReviewCreate }}
                                 </div>
-                                <div style="margin-left: 5px;">수정</div>
-                                <div style="margin-left: 5px;">삭제</div>
+                                <div style="margin-left: 5px;"><a href="#" style="color: black;">수정</a></div>
+                                <div style="margin-left: 5px;"><a href="#" style="color: black;">삭제</a></div>
                             </div>
                         </div>
 
@@ -168,10 +179,20 @@ export default {
             attractionDesc: Object, // attraction_description 정보있음
             recommendAttr: [],
             reviews: [],
+            rate: Number,
         };
     },
     created() {
-        console.log(this.$route.params.attrno);
+
+        // 별점 보이기
+        http.get(`/attraction/rate/${this.$route.params.attrno}`).then(({ data }) => {
+            if (data == null) this.rate = 0;
+            else {
+                // rate에 맞게 별점 보이기
+                this.rate = data.rate;
+            }
+        })
+
         // 여행지에 대한 상세정보 불러오기
         http.get(`/attraction/${this.$route.params.attrno}`).then(({ data }) => {
             // console.log(data)
@@ -192,8 +213,15 @@ export default {
             this.reviews = data;
             console.log(this.reviews)
         })
+        
     },
     methods: {},
+    filters: {
+        ratingToPercent(rate) {
+            const score = + rate - 10;
+            return score;
+        }
+    }
 };
 </script>
 
@@ -256,6 +284,15 @@ export default {
 .card>p {
     margin: 0px;
 }
+.star-ratings {
+  color: #aaa9a9; 
+  position: relative;
+  unicode-bidi: bidi-override;
+  width: max-content;
+  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1.3px;
+  -webkit-text-stroke-color: #2b2a29;
+}
 
 .star-rating {
     display: flex;
@@ -266,8 +303,27 @@ export default {
     padding: 0 0.2em;
     text-align: center;
     width: 5em;
+    -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1.3px;
+    -webkit-text-stroke-color: #2b2a29;
 }
 
+.star-ratings-fill {
+    color: #fff58c;
+    padding: 0;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    -webkit-text-fill-color: gold;
+}
+
+.star-ratings-base {
+    z-index: 0;
+    padding: 0;
+}
 .star-rating input {
     display: none;
 }

@@ -59,6 +59,13 @@
                         :freeboard="freeboard"></free-board-list-item>
                 </tbody>
             </table>
+
+            <b-pagination
+                v-model="currentPage"
+                :total-rows="rows"
+                :per-page="perPage"
+                aria-controls="my-table"
+            ></b-pagination>
         </div>
     </div>
 </template>
@@ -75,6 +82,8 @@ export default {
     },
     data() {
         return {
+            perPage: 10,
+            currentPage: 1,
             freeboardList: [],
         };
     },
