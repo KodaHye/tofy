@@ -96,7 +96,7 @@
                         <span>출발일</span>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="date" class="form-control">
+                        <input type="date" class="form-control" v-model="startDate">
                     </div>
                 </div>
 
