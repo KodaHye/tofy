@@ -57,10 +57,6 @@ export default {
                     alert('최대 5개의 태그까지만 선택 가능합니다.');
                 }
             }
-            
-            //상위 컴포넌트에 해당 태그 객체 보내기
-            // if (this.selectedTags.length < 5) {
-            // }
         }
     }
 }
