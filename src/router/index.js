@@ -19,7 +19,7 @@ const onlyAuthUser = async (to, from, next) => {
   if (!checkToken || checkUserInfo === null) {
     alert("로그인이 필요합니다.");
     // next({ name: "login" });
-    router.push({ name: "login" }).catch((error) => {
+    await router.push({ name: "login" }).catch((error) => {
       if (error.name !== "NavigationDuplicated") {
         throw error;
       }
@@ -59,6 +59,8 @@ const routes = [
   {
     path: "/mypage",
     name: "myPage",
+    redirect: "/mypage/userInfo",
+    beforeEnter: onlyAuthUser,
     component: () => import("@/views/MypageView.vue"),
     children: [
       {
@@ -123,6 +125,7 @@ const routes = [
     name: "notice",
     redirect: "/notice/list",
     component: () => import("@/views/NoticeView"),
+    beforeEnter: onlyAuthUser,
     children: [
       {
         path: "list",
