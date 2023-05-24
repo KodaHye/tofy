@@ -11,7 +11,7 @@
             <div class="">
                 <div class="row align-self-center mb-2">
                     <div class="col-md-2 text-start">
-                        <b-button variant="outline-primary" @click="$router.push({ name: 'freeboardwrite' })">글쓰기</b-button>
+                        <b-button v-if="this.userInfo.adminFl === Y" variant="outline-primary" @click="$router.push({ name: 'freeboardwrite' })">글쓰기</b-button>
                     </div>
                     <div class="col-md-3"></div>
                     <div class="col-md-7">
@@ -68,10 +68,10 @@
 <script>
 
 import http from "@/api/http";
-// import FreeBoardListItem from "@/components/freeboard/FreeBoardListItemView";
 import NoticeListItem from "@/components/notice/NoticeListItemView";
 
-// import { getNoticeList } from '@/api/notice';
+import { mapState } from "vuex";
+const userStore = "userStore";
 
 export default {
     name: 'NoticeView',
@@ -95,7 +95,10 @@ export default {
         http.get('/notice').then(({data}) => {
             this.noticeList = data;
         })
-     },
+    },
+    computed: {
+        ...mapState(userStore, ["userInfo"]),
+    },
     methods: {},
 };
 </script>
