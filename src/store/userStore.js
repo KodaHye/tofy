@@ -1,6 +1,6 @@
 import jwtDecode from "jwt-decode";
 import router from "@/router";
-import { login, findById, tokenRegeneration, logout } from "@/api/user";
+import { login, findById, tokenRegeneration, logout, updateUser } from "@/api/user";
 
 const userStore = {
   namespaced: true,
@@ -140,6 +140,34 @@ const userStore = {
         }
       );
     },
+
+    async userUpdate({commit}, user) {
+      await updateUser(
+        user,
+        res => {
+          console.log("넘어온 회원 정보", user);
+          if (res.data.status === "success") {
+            console.log("성공적으로 회원정보수정 완료 !", res.data.status);
+            console.log("바뀐 회원 정보", res.data.data.user);
+            commit("SET_USER_INFO", res.data.data.user);
+            let accessToken = res.data.data["access-token"];
+            let refreshToken = res.data.data["refresh-token"];
+            // console.log("login success token created!!!! >> ", accessToken, refreshToken);
+            commit("SET_IS_LOGIN", true);
+            commit("SET_IS_LOGIN_ERROR", false);
+            commit("SET_IS_VALID_TOKEN", true);
+            sessionStorage.setItem("access-token", accessToken);
+            sessionStorage.setItem("refresh-token", refreshToken);
+            console.log("정보 저장 완료");
+          } else {
+            alert("아이디/패스워드가 올바르지 않습니다.");
+            commit("SET_IS_LOGIN", false);
+            commit("SET_IS_LOGIN_ERROR", true);
+            commit("SET_IS_VALID_TOKEN", false);
+          }
+        }
+      )
+    }
   },
 };
 

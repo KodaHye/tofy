@@ -28,4 +28,9 @@ async function logout(userid, success, fail) {
   await api.delete(`/user/logout/${userid}`).then(success).catch(fail);
 }
 
-export { join, login, idCheck, findById, tokenRegeneration, logout };
+async function updateUser(user, success, fail) {
+  api.defaults.headers["refresh-token"] = sessionStorage.getItem("refresh-token");
+  await api.put('/user', user).then(success).catch(fail);
+}
+
+export { join, login, idCheck, findById, tokenRegeneration, logout, updateUser };
