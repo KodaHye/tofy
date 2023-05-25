@@ -7,7 +7,7 @@
                     <b-row style="margin-top: 30px;">
                         <b-col class="sidebar-item"><a href="#" @click="change(0)">개인정보</a></b-col>
                         <div class="w-100"></div>
-                        <b-col class="sidebar-item"><a href="#" @click="change(1)">태그정보</a></b-col>
+                        <!-- <b-col class="sidebar-item"><a href="#" @click="change(1)">태그정보</a></b-col> -->
                         <div class="w-100"></div>
                         <b-col class="sidebar-item"><a href="#" @click="change(2)">우승 여행지
                                 목록</a></b-col>
@@ -16,7 +16,7 @@
                 <!--컴포넌트 (개인정보, 태그 수정, 우승 여행지 목록)-->
                 <b-col style="height: 100%; overflow: auto;">
                     <b-row>
-                        <b-col style="font-size: 30px; text-align: center; overflow: scroll;">{{ selectName }}</b-col>
+                        <b-col style="font-size: 30px; text-align: center; overflow: auto;">{{ selectName }}</b-col>
                         <div class="w-100" style="height: 30px;"></div>
                         <b-col>
                             <router-view></router-view>
@@ -30,7 +30,6 @@
 
 <script>
 import { mapState } from 'vuex';
-
 const userStore = "userStore";
 
 export default {
@@ -39,7 +38,7 @@ export default {
     data() {
         return {
             names: ["개인정보", "태그정보", "여행지 월드컵 기록"],
-            selectName: String
+            selectName: String,
         };
     },
     computed: {
