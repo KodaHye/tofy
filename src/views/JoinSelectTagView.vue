@@ -12,8 +12,11 @@
         <tag-items @selectTag="receiveTag" />
         <div class="w-100" style="height: 40px;"></div>
         <!--가입 버튼-->
-        <b-col align-self="center" style="text-align: center;"><a href="#" class="join-btn"
-            @click="submitTags()">등록</a></b-col>
+        <b-col align-self="center" style="text-align: center;">
+          <button class="tag-submit-btn" @click="submitTags()" value="등록">
+            태그 등록
+          </button>
+        </b-col>
       </b-row>
     </div>
   </div>
@@ -43,22 +46,28 @@ export default {
 
       console.log("전송될 태그", this.tags);
 
-      //선택된 태그를 DB에 저장
-      saveSelectedTags(
-        this.tags,
-        res => {
-          if (res.data.status === 'success') {
-            console.log("유저가 선택한 태그 정보 저장 완료");
-            alert("태그 정보가 입력되었습니다 !!!");
-            this.$router.push({ name: 'home' });
-          } else {
-            console.log("유저가 선택한 태그 정보 저장 실패");
+      //선택된 태그가 0개라면 등록 안됨
+      if (this.tags.length == 0) {
+        alert("태그는 1개 이상 선택해야 합니다.");
+      } else {
+        //선택된 태그를 DB에 저장
+        saveSelectedTags(
+          this.tags,
+          res => {
+            if (res.data.status === 'success') {
+              console.log("유저가 선택한 태그 정보 저장 완료");
+              alert("태그 정보가 입력되었습니다 !!!");
+              this.$router.push({ name: 'worldcup' });
+            } else {
+              console.log("유저가 선택한 태그 정보 저장 실패");
+            }
+          },
+          err => {
+            console.log("태그정보 저장 중 에러", err);
           }
-        },
-        err => {
-          console.log("태그정보 저장 중 에러", err);
-        }
-      )
+        )
+      }
+
     },
 
     receiveTag(tag) {
@@ -114,13 +123,82 @@ export default {
   transition: 0.1s ease;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+.tag-submit-btn {
+  align-items: center;
+  appearance: none;
+  background-color: #fff;
+  border-radius: 24px;
+  border-style: none;
+  box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+  box-sizing: border-box;
+  color: #3c4043;
+  cursor: pointer;
+  display: inline-flex;
+  fill: currentcolor;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 48px;
+  justify-content: center;
+  letter-spacing: .25px;
+  line-height: normal;
+  max-width: 100%;
+  overflow: visible;
+  padding: 2px 24px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1), opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+  will-change: transform, opacity;
+  z-index: 0;
+}
 
-    to {
-        opacity: 1;
-    }
+.tag-submit-btn:hover {
+  background: #F6F9FE;
+  color: #174ea6;
+}
+
+.tag-submit-btn:active {
+  box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
+  outline: none;
+}
+
+.tag-submit-btn:focus {
+  outline: none;
+  border: 2px solid #4285f4;
+}
+
+.tag-submit-btn:not(:disabled) {
+  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+
+.tag-submit-btn:not(:disabled):hover {
+  box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15) 0 6px 10px 4px;
+}
+
+.tag-submit-btn:not(:disabled):focus {
+  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+
+.tag-submit-btn:not(:disabled):active {
+  box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15) 0 8px 12px 6px;
+}
+
+.tag-submit-btn:disabled {
+  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 </style>

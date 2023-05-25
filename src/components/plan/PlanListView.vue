@@ -1,7 +1,7 @@
 <template>
     <div class="box">
         <div class="content">
-            <div style="margin: 20px 0px;">
+            <div style="margin: 25px 40px 40px;">
                 <div>
                     <h3>여행계획 게시판 입니다.</h3>
                 </div>

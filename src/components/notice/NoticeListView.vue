@@ -1,7 +1,7 @@
 <template>
     <div class="box">
         <div class="content">
-            <div style="margin: 20px 0px;">
+            <div style="margin: 20px 20px;">
                 <div>
                     <h2>공지사항 게시판입니다.</h2>
                 </div>
@@ -56,8 +56,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <notice-list-item v-for="(board, i) in noticeList" :key="i" :board="board"></notice-list-item>
-                    <!-- <free-board-list-item v-for="(board, i) in noticeList" :key="i" :board="board"></free-board-list-item> -->
+                    <notice-list-item v-for="(notice, i) in noticeList" :key="i" :notice="notice"></notice-list-item>
                 </tbody>
             </table>
         </div>
@@ -75,7 +74,6 @@ const userStore = "userStore";
 export default {
     name: 'NoticeView',
     components: {
-        // FreeBoardListItem,
         NoticeListItem,
     },
     data() {
@@ -84,15 +82,9 @@ export default {
         };
     },
     created() {
-        // getNoticeList(
-        //     data => {
-        //         console.log(data)
-        //     }, err => {
-        //         console.log(err)
-        //     }
-        // )
         http.get('/notice').then(({ data }) => {
             this.noticeList = data;
+            console.log(this.noticeList);
         })
     },
     computed: {

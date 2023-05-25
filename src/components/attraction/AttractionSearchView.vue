@@ -1,7 +1,7 @@
 <template>
     <div class="box">
         <div class="content">
-            <div style="margin: 20px 0px;">
+            <div style="margin: 25px 40px 40px;">
                 <div>
                     <h2>지역별검색지 조회</h2>
                 </div>
