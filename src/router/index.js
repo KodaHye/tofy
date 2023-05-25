@@ -191,20 +191,25 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+
+  //다른 페이지에서 최초 태그 선택 페이지 이동 시도할 경우 가드
   if (to.path === '/selectTag' && from.path === '/') {
     alert("잘못된 요청입니다.");
     next({name : 'home'});
   }
-  else if (from.path === '/selectTag') {
-    if (to.path === '/') {next()}
-    else if (window.confirm("이 창을 벗어날 경우 기존 입력이 초기화 됩니다. 나가시겠습니까?")) {
-      next();
-    } else {
+  
+  //최초 태그 선택창에서 이동
+  if (from.path === '/selectTag') {
+    //다음 창 이동 이므로 그냥 이동
+    if (to.path === '/worldcup') {next()}
+    //다른 창 이동 시도 시 태그 선택 후 이동하도록 유도
+    else {
+      alert("태그 등록 후 이동 가능합니다.");
       next(false);
     }
-  } else {
-    next();
   }
+
+  next();
 });
 
 export default router;
