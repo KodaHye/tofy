@@ -56,7 +56,9 @@
                         <h2 style="padding-right: 10px;">가볼만한 여행지 추천</h2>
                         <span style="">top 10</span>
                     </div>
-                    <span>나와 비슷한 태그를 고른 사람들이 많이 선택한 순서대로 여행지가 추천됩니다.</span>
+                    <div style="margin-top: 10px; margin-bottom: 10px;">
+                        <span>나와 비슷한 태그를 고른 사람들이 많이 선택한 순서대로 여행지가 추천됩니다.</span>
+                    </div>
                 </div>
                 <div>
                     <carousel ref="carousel" :perPage="4" :navigation-enabled="true"
@@ -286,10 +288,15 @@ export default {
     padding: 10px;
     border: 0px;
     background-color: rgba(255, 255, 255, 0.8);
+    transition: transform 0.3s ease-in-out;
 }
 
 .card>p {
     margin: 0px;
+}
+
+.card:hover {
+    transform: scale(1.05);
 }
 
 </style>

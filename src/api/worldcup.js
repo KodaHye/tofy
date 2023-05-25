@@ -1,4 +1,7 @@
 import { worldCupInstance } from "./index";
+import { apiInstance } from "./index.js";
+
+const api = apiInstance();
 
 const worldcup = worldCupInstance();
 
@@ -7,7 +10,7 @@ function pickRandomAttractions(success, fail) {
 }
 
 async function saveWorldCupResult(result, success, fail) {
-    await worldcup.post(result).then(success).catch(fail);
+    await api.post('/worldcup', result).then(success).catch(fail);
 }
 
 export { pickRandomAttractions, saveWorldCupResult };
