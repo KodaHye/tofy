@@ -63,8 +63,13 @@ export default {
 </script>
 
 <style>
+.b-col {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .tag-row {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .tag-button {
@@ -73,16 +78,11 @@ export default {
     border-radius: 15px;
     margin-right: 10px;
     width: 160px;
-    /* 너비를 설정합니다. */
     height: 50px;
-    /* 높이를 설정합니다. */
     text-align: center;
-    /* 텍스트를 가운데로 정렬합니다. */
     color: white;
     transform: scale(1);
-    /* 기본 크기 */
     transition: transform 2.0s ease;
-    /* 크기 변경에 애니메이션 적용 */
     transition: background-color 0.4s ease;
 }
 
@@ -94,4 +94,5 @@ export default {
     background-color: pink;
     color: white;
     transition: background-color 0.4s ease;
-}</style>
+}
+</style>
