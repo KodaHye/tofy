@@ -3,38 +3,38 @@
     <!--타이틀 start-->
     <div class="section">
       <div class="title" data-aos="fade-up" data-aos-duration="3000" data-aos-anchor-placement="bottom-bottom">
-        <h1 style="font-size: 40pt; opacity: 0.8;">Trip only for you</h1>
+        <h1>Trip only for you</h1>
       </div>
     </div>
     <!--타이틀 end-->
     <!--월드컵 하러가기 문구 start-->
     <div class="section">
       <div class="title" data-aos="fade-up" data-aos-duration="3000" data-aos-anchor-placement="bottom-bottom">
-        <h1 style="font-size: 30pt; opacity: 0.8; margin-bottom: 10px;">당신이 가고싶은 여행지를 골라보세요.</h1>
-        <a href="#" @click="goWorldCup()"><span style="font-size: 20pt; opacity: 0.8;">여행 하러가기</span></a>
+        <h1>당신이 가고싶은 여행지를 골라보세요.</h1>
+        <a href="#" @click="$router.push('/worldcup')">여행 하러가기</a>
       </div>
     </div>
     <!--월드컵 하러가기 문구 end-->
     <!--로그인 시 사용자 기반 추천 여행지 보이기 start-->
     <div class="section">
       <!--여기에 캐러셀 구현 예정-->
-      <div style="margin-right: 50px; margin-left: 50px;" data-aos="fade-up">
-        <carousel ref="carousel" :perPage="4" :navigation-enabled="true"
+      <div style="margin-right: 50px; margin-left: 50px; width: 100vw;" data-aos="fade-up" data-aos-duration="3000" data-aos-anchor-placement="bottom-bottom">
+        <h3>당신이 선택한 태그를 선택한 사람들이</h3>
+        <h3 style="margin-bottom: 10px;">많이 고른 여행지 입니다.</h3>
+        <carousel ref="carousel" :perPage="5" :navigation-enabled="true"
           navigationPrevLabel='<i class="fas fa-angle-left"></i>'
           navigationNextLabel='<i class="fa fa-angle-right" aria-hidden="true"></i>'>
-          <slide v-for="card in recommendAttr" :key="card.id"
-            style="box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;">
+          <slide v-for="card in cards" :key="card.id">
             <!-- 카드 내용을 추가하세요 -->
-            <div class="card" style="height: 200px;">
-              <div style="width: 100%; height: 60%;" class="image-box">
-                <img :src="card.firstImage" alt="카드 이미지" class="image-thumbnail" />
-              </div>
-              <p>{{ card.title }}</p>
+            <div class="card" style="width: 300px" @click="$router.push({ name: 'attractionDetail', params: { attrno: card.contentId }})">
+              <img :src="card.firstImage" alt="카드 이미지" style="width: 100%;"/>
+              <p style="font-weight: bold; padding-top: 5px;">{{ card.title }}</p>
               <p>{{ card.addr }}</p>
             </div>
           </slide>
         </carousel>
       </div>
+
     </div>
     <!--로그인 시 사용자 추천 여행지 보이기 start-->
   </div>
@@ -43,6 +43,8 @@
 <script>
 import { Carousel, Slide } from 'vue-carousel';
 import http from "@/api/http";
+import { mapState } from "vuex";
+const userStore = "userStore";
 
 export default {
   components: {
@@ -51,28 +53,25 @@ export default {
   },
   data() {
     return {
-      recommendAttr: [],
+      cards: [],
     }
   },
   created() {
-    // 여행지에 대한 추천 불러오기
-    // 사용자 기반 추천
-    http.get(`/recommend/125266`).then(({ data }) => {
-      this.recommendAttr = data.data.recommendAttr
-      console.log(this.recommendAttr);
+    console.log(this.userInfo.userNo);
+
+    http.get(`/recommendByTag/${this.userInfo.userNo}`)
+    .then(({ data }) => {
+      this.cards = data.data.recommendAttr;
+      console.log(this.cards)
     })
   },
   mounted() {
   },
+  computed: {
+		...mapState(userStore, ["userInfo"]),
+  },
+
   methods: {
-    async goWorldCup() {
-      await this.$router.push('/worldcup')
-      .catch(err => {
-        if (err.name !== 'NavigationDuplicated') {
-        throw err;
-      }
-      })
-    }
   }
 };
 </script>
