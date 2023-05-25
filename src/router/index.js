@@ -142,6 +142,16 @@ const routes = [
         name: "noticeDetail",
         component: () => import("@/components/notice/NoticeDetailView"),
       },
+      {
+        path: "delete/:noticeno",
+        name: "noticeDelete",
+        component: () => import("@/components/notice/NoticeDeleteView"),
+      },
+      {
+        path: "modify/:noticeno",
+        name: "noticeModify",
+        component: () => import("@/components/notice/NoticeModifyView"),
+      },
     ],
   },
   {
