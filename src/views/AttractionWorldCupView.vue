@@ -1,7 +1,7 @@
 <template>
     <div class="box">
         <div class="worldcup-content">
-            <h2>여행지 이상형 월드컵</h2>
+            <h2>여행지 월드컵</h2>
             <div v-if="isLoading">
                 Loading...
             </div>
