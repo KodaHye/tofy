@@ -17,4 +17,8 @@ function pickWorldCupResultByUserNo(userNo, success, fail) {
     worldcup.get(`/${userNo}`).then(success).catch(fail);
 }
 
-export { pickRandomAttractions, saveWorldCupResult, pickWorldCupResultByUserNo };
+async function increaseWinCntByTag(params, success, fail) {
+    await api.post('/worldcup/win', params).then(success).catch(fail);
+}
+
+export { pickRandomAttractions, saveWorldCupResult, pickWorldCupResultByUserNo, increaseWinCntByTag };

@@ -10,4 +10,8 @@ function saveSelectedTags(tags, success, fail) {
     tag.post('/tag', tags).then(success).catch(fail);
 }
 
-export {getAllTags, saveSelectedTags};
+async function getUserTags(userNo, success, fail) {
+    await tag.get(`/tag/${userNo}`).then(success).catch(fail);
+}
+
+export {getAllTags, saveSelectedTags, getUserTags};
