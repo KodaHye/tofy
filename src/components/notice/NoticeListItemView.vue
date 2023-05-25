@@ -1,14 +1,14 @@
 <template>
     <tr class="text-center">
-        <th scope="row">{{ notice.freeBoardNo }}</th>
+        <th scope="row">{{ notice.noticeNo }}</th>
         <td class="text-start">
-            <router-link :to="{ name: 'freeboardDetail', params: { noticeNo: notice.freeBoardNo } }">
-                {{ notice.freeBoardTitle }}
+            <router-link :to="{ name: 'noticeDetail', params: { noticeno: notice.noticeNo } }">
+                {{ notice.noticeTitle }}
             </router-link>
         </td>
         <td>{{ notice.userNo }}</td>
-        <td>{{ notice.freeBoardHit }}</td>
-        <td>{{ notice.freeBoardCreate }}</td>
+        <td>{{ notice.noticeHit }}</td>
+        <td>{{ notice.noticeCreate }}</td>
     </tr>
 </template>
 
