@@ -66,7 +66,12 @@ export default {
   },
   methods: {
     async goWorldCup() {
-      await this.$router.push('/worldcup');
+      await this.$router.push('/worldcup')
+      .catch(err => {
+        if (err.name !== 'NavigationDuplicated') {
+        throw err;
+      }
+      })
     }
   }
 };

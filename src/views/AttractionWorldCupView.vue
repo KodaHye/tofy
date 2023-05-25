@@ -12,20 +12,18 @@
                         <!--매치 start-->
                         <b-row>
                             <!--왼쪽 여행지 start-->
-                            <b-col :style="{ 'background-image': `url(${match.destination1.firstImage === '' ? require('/public/no_image.jpg') : match.destination1.firstImage})` }" 
-                                    class="worldcup-content-card"
-                                    @click="selectDestination(match, match.destination1, 0)"
-                                    >
+                            <b-col
+                                :style="{ 'background-image': `url(${match.destination1.firstImage === '' ? require('/public/no_image.jpg') : match.destination1.firstImage})` }"
+                                class="worldcup-content-card" @click="selectDestination(match, match.destination1, 0)">
                                 <div class="destination">{{ match.destination1.title }}</div>
                                 <div class="destination">{{ match.destination1.addr }}</div>
                             </b-col>
                             <!--왼쪽 여행지 end-->
                             <b-col cols="3" style="text-align: center; font-size: 30px; font-weight: bolder;">vs</b-col>
                             <!--오른쪽 여행지 start-->
-                            <b-col :style="{ 'background-image': `url(${match.destination2.firstImage === '' ? require('/public/no_image.jpg') : match.destination2.firstImage})` }" 
-                                    class="worldcup-content-card"
-                                    @click="selectDestination(match, match.destination2, 0)"
-                                    >
+                            <b-col
+                                :style="{ 'background-image': `url(${match.destination2.firstImage === '' ? require('/public/no_image.jpg') : match.destination2.firstImage})` }"
+                                class="worldcup-content-card" @click="selectDestination(match, match.destination2, 0)">
                                 <div class="destination">{{ match.destination2.title }}</div>
                                 <div class="destination">{{ match.destination2.addr }}</div>
                             </b-col>
@@ -40,20 +38,18 @@
                         <!--매치 start-->
                         <b-row>
                             <!--왼쪽 여행지 start-->
-                            <b-col :style="{ 'background-image': `url(${match.destination1.firstImage === '' ? require('/public/no_image.jpg') : match.destination1.firstImage})` }" 
-                                    class="worldcup-content-card"
-                                    @click="selectDestination(match, match.destination1, 1)"
-                                    >
+                            <b-col
+                                :style="{ 'background-image': `url(${match.destination1.firstImage === '' ? require('/public/no_image.jpg') : match.destination1.firstImage})` }"
+                                class="worldcup-content-card" @click="selectDestination(match, match.destination1, 1)">
                                 <div class="destination">{{ match.destination1.title }}</div>
                                 <div class="destination">{{ match.destination1.addr }}</div>
                             </b-col>
                             <!--왼쪽 여행지 end-->
                             <b-col cols="3" style="text-align: center; font-size: 30px; font-weight: bolder;">vs</b-col>
                             <!--오른쪽 여행지 start-->
-                            <b-col :style="{ 'background-image': `url(${match.destination2.firstImage === '' ? require('/public/no_image.jpg') : match.destination2.firstImage})` }" 
-                                    class="worldcup-content-card"
-                                    @click="selectDestination(match, match.destination2, 1)"
-                                    >
+                            <b-col
+                                :style="{ 'background-image': `url(${match.destination2.firstImage === '' ? require('/public/no_image.jpg') : match.destination2.firstImage})` }"
+                                class="worldcup-content-card" @click="selectDestination(match, match.destination2, 1)">
                                 <div class="destination">{{ match.destination2.title }}</div>
                                 <div class="destination">{{ match.destination2.addr }}</div>
                             </b-col>
@@ -68,20 +64,18 @@
                         <!--매치 start-->
                         <b-row>
                             <!--왼쪽 여행지 start-->
-                            <b-col :style="{ 'background-image': `url(${match.destination1.firstImage === '' ? require('/public/no_image.jpg') : match.destination1.firstImage})` }" 
-                                    class="worldcup-content-card"
-                                    @click="selectDestination(match, match.destination1, 2)"
-                                    >
-                                <div class="destination" >{{ match.destination1.title }}</div>
+                            <b-col
+                                :style="{ 'background-image': `url(${match.destination1.firstImage === '' ? require('/public/no_image.jpg') : match.destination1.firstImage})` }"
+                                class="worldcup-content-card" @click="selectDestination(match, match.destination1, 2)">
+                                <div class="destination">{{ match.destination1.title }}</div>
                                 <div>{{ match.destination1.addr }}</div>
                             </b-col>
                             <!--왼쪽 여행지 end-->
                             <b-col cols="3" style="text-align: center; font-size: 30px; font-weight: bolder;">vs</b-col>
                             <!--오른쪽 여행지 start-->
-                            <b-col :style="{ 'background-image': `url(${match.destination2.firstImage === '' ? require('/public/no_image.jpg') : match.destination2.firstImage})` }" 
-                                    class="worldcup-content-card"
-                                    @click="selectDestination(match, match.destination2, 2)"
-                                    >
+                            <b-col
+                                :style="{ 'background-image': `url(${match.destination2.firstImage === '' ? require('/public/no_image.jpg') : match.destination2.firstImage})` }"
+                                class="worldcup-content-card" @click="selectDestination(match, match.destination2, 2)">
                                 <div class="destination">{{ match.destination2.title }}</div>
                                 <div class="destination">{{ match.destination2.addr }}</div>
                             </b-col>
@@ -96,20 +90,18 @@
                         <!--매치 start-->
                         <b-row>
                             <!--왼쪽 여행지 start-->
-                            <b-col :style="{ 'background-image': `url(${match.destination1.firstImage === '' ? require('/public/no_image.jpg') : match.destination1.firstImage})` }" 
-                                    class="worldcup-content-card"
-                                    @click="selectDestination(match, match.destination1, 3)"
-                                    >
+                            <b-col
+                                :style="{ 'background-image': `url(${match.destination1.firstImage === '' ? require('/public/no_image.jpg') : match.destination1.firstImage})` }"
+                                class="worldcup-content-card" @click="selectDestination(match, match.destination1, 3)">
                                 <div class="destination">{{ match.destination1.title }}</div>
                                 <div class="destination">{{ match.destination1.addr }}</div>
                             </b-col>
                             <!--왼쪽 여행지 end-->
                             <b-col cols="3" style="text-align: center; font-size: 30px; font-weight: bolder;">vs</b-col>
                             <!--오른쪽 여행지 start-->
-                            <b-col :style="{ 'background-image': `url(${match.destination2.firstImage === '' ? require('/public/no_image.jpg') : match.destination2.firstImage})` }" 
-                                    class="worldcup-content-card"
-                                    @click="selectDestination(match, match.destination2, 3)"
-                                    >
+                            <b-col
+                                :style="{ 'background-image': `url(${match.destination2.firstImage === '' ? require('/public/no_image.jpg') : match.destination2.firstImage})` }"
+                                class="worldcup-content-card" @click="selectDestination(match, match.destination2, 3)">
                                 <div class="destination">{{ match.destination2.title }}</div>
                                 <div class="destination">{{ match.destination2.addr }}</div>
                             </b-col>
@@ -123,10 +115,8 @@
                     <div v-if="isWinnerSelected">
                         <p>축하합니다! {{ winner.title }}을(를) 고르셨습니다!</p>
                         <div class="worldcup-content-card"
-                            :style="{ 'background-image': `url(${winner.firstImage === '' ? require('/public/no_image.jpg') : winner.firstImage})` }" 
-                            style="margin: auto;"
-                            @click="goToDetailView(winner.contentId)"
-                        >
+                            :style="{ 'background-image': `url(${winner.firstImage === '' ? require('/public/no_image.jpg') : winner.firstImage})` }"
+                            style="margin: auto;" @click="goToDetailView(winner.contentId)">
                             <div class="destination">{{ winner.title }}</div>
                             <div class="destination">{{ winner.addr }}</div>
                         </div>
@@ -140,7 +130,8 @@
   
 <script>
 import { mapState } from 'vuex';
-import { pickRandomAttractions, saveWorldCupResult} from '@/api/worldcup';
+import { pickRandomAttractions, saveWorldCupResult, increaseWinCntByTag } from '@/api/worldcup';
+import { getUserTags } from '@/api/tag';
 
 const userStore = "userStore";
 
@@ -159,7 +150,8 @@ export default {
             currentRound: 1,
             currentMatchId: 0, // 수정: 현재 진행 중인 매치의 id
             winner: null,
-            isWinnerSelected: false
+            isWinnerSelected: false,
+            tags: ''
         };
     },
     created() {
@@ -177,7 +169,7 @@ export default {
         ...mapState(userStore, ["isLogin", "isLoginError", "userInfo"])
     },
     watch: {
-        isWinnerSelected() {
+        async isWinnerSelected() {
             if (this.isWinnerSelected) {
                 const result = {
                     contentId: this.winner.contentId,
@@ -186,7 +178,7 @@ export default {
 
                 console.log(result);
 
-                saveWorldCupResult (
+                await saveWorldCupResult(
                     result,
                     res => {
                         if (res.data.status === "success") {
@@ -195,6 +187,40 @@ export default {
                     },
                     err => {
                         console.log("결과 저장 에러", err);
+                    }
+                )
+
+                //유저의 태그정보 불러오기
+                await getUserTags(
+                    this.userInfo.userNo,
+                    res => {
+                        if (res.data.status === "success") {
+                            console.log("유저 태그정보 불러오기 성공", res.data.data.tags);
+                            this.tags = res.data.data.tags;
+                        } else {
+                            console.log("유저의 태그 정보 불러오기 에러", res.data.message);
+                        }
+                    },
+                    err => {
+                        console.log("태그 불러오기 중 에러 발생", err);
+                    }
+                )
+
+                //우승한 여행지 우승횟수 태그별 증가
+                await increaseWinCntByTag(
+                    {
+                        contentId: this.winner.contentId,
+                        tags: this.tags
+                    },
+                    res => {
+                        if (res.data.status === "success") {
+                            console.log("우승한 여행지 우승 횟수 태그별 증가 성공");
+                        } else {
+                            console.log("우승한 여행지 우승 횟수 태그별 증가 에러");
+                        }
+                    },
+                    err => {
+                        console.log(err);
                     }
                 )
             }
@@ -263,7 +289,7 @@ export default {
         },
         async goToDetailView(no) {
             await this.$router.push(`/attraction/detail/${no}`);
-        }
+        },
     }
 };
 </script>
@@ -298,10 +324,10 @@ export default {
 }
 
 .worldcup-content-card {
-    border-radius: 10px; 
-    box-shadow: 10px; 
-    height: 60vh; 
-    width: 60vw; 
+    border-radius: 10px;
+    box-shadow: 10px;
+    height: 60vh;
+    width: 60vw;
     background-size: cover;
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
     animation: move 1.0s alternate;
@@ -313,8 +339,16 @@ export default {
 }
 
 @keyframes move {
-    0% { transform: scale(1, 1); }
-    5% {transform: scale(0.9, 0.9);}
-    0% {transform: scale(1, 1);}
+    0% {
+        transform: scale(1, 1);
+    }
+
+    5% {
+        transform: scale(0.9, 0.9);
+    }
+
+    0% {
+        transform: scale(1, 1);
+    }
 }
 </style>

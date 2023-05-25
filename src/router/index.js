@@ -16,16 +16,14 @@ const onlyAuthUser = async (to, from, next) => {
     console.log("토큰 유효성 체크");
     await store.dispatch("userStore/getUserInfo", token);
   }
+
   if (!checkToken || checkUserInfo === null) {
     alert("로그인이 필요합니다.");
-    // next({ name: "login" });
-    await router.push({ name: "login" }).catch((error) => {
-      if (error.name !== "NavigationDuplicated") {
-        throw error;
-      }
-    });
+    next({ name: "login" });
+    return;
   } else {
-    console.log("로그인 완료");
+    setTimeout(() => {
+    }, 5000)
     next();
   }
 };
@@ -83,7 +81,7 @@ const routes = [
   {
     path: "/worldcup",
     name: "worldcup",
-    beforeEnter: onlyAuthUser,
+    // beforeEnter: onlyAuthUser,
     component: () => import("@/views/AttractionWorldCupView.vue"),
   },
   {
@@ -198,20 +196,18 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
 
   //다른 페이지에서 최초 태그 선택 페이지 이동 시도할 경우 가드
-  if (to.path === '/selectTag' && from.path === '/') {
+  if (to.path === '/selectTag' && from.path !== '/join') {
     alert("잘못된 요청입니다.");
     next({name : 'home'});
+    return;
   }
   
-  //최초 태그 선택창에서 이동
-  if (from.path === '/selectTag') {
+  // selectTag => worldcup 경로가 아닐시 가드
+  if (from.path === '/selectTag' && to.path !== '/worldcup') {
     //다음 창 이동 이므로 그냥 이동
-    if (to.path === '/worldcup') {next()}
-    //다른 창 이동 시도 시 태그 선택 후 이동하도록 유도
-    else {
-      alert("태그 등록 후 이동 가능합니다.");
-      next(false);
-    }
+    alert("태그 등록 후 이동 가능합니다.");
+    next(false);
+    return;
   }
 
   next();
