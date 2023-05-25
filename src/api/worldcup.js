@@ -6,4 +6,8 @@ function pickRandomAttractions(success, fail) {
     worldcup.get().then(success).catch(fail);
 }
 
-export { pickRandomAttractions };
+async function saveWorldCupResult(result, success, fail) {
+    await worldcup.post(result).then(success).catch(fail);
+}
+
+export { pickRandomAttractions, saveWorldCupResult };
