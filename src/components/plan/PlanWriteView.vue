@@ -108,7 +108,7 @@
                         <span>도착일</span>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="date" class="form-control">
+                        <input type="date" class="form-control"  v-model="endDate">
                     </div>
                 </div>
 
@@ -144,6 +144,10 @@
 import http from "@/api/http";
 import draggable from 'vuedraggable'
 
+import { mapState } from "vuex";
+
+const userStore = "userStore";
+
 export default {
     name: 'PlanWrite',
     components: {
@@ -177,13 +181,19 @@ export default {
             console.log("마커 생성!")
         },
         submitPlan() {
-            this.plan.title = this.title;
-            this.plan.content = this.content;
-            this.plan.attractionPlanList = this.attractionPlanList;
-            this.plan.startDate = this.startDate;
-            this.plan.endDate = this.endDate;
+            this.plan.userNo = this.userInfo.userNo;
+            this.plan.planTitle = this.title;
+            this.plan.planContent = this.content;
+            this.plan.planDetail = this.attractionPlanList;
+            this.plan.planStart = this.startDate;
+            this.plan.planEnd = this.endDate;
 
             console.log(this.plan)
+
+            http.post(`/plan`, this.plan);
+            
+            alert("여행계획이 등록되었습니다.")
+            this.$router.push("/plan/list")
         },
         getAttractions() {
 
@@ -296,6 +306,10 @@ export default {
             document.head.appendChild(script);
         }
     },
+
+    computed: {
+		...mapState(userStore, ["userInfo"]),
+     },
 };
 </script>
 
