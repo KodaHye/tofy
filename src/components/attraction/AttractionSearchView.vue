@@ -263,7 +263,7 @@ export default {
             var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 
             //마커 이미지 크기
-            var imageSize = new window.kakao.maps.Size(24, 35);
+            var imageSize = new window.kakao.maps.Size(35, 35);
 
             for (var i = 0; i < this.positions.length; i++) {
                 if (this.positions[i].type == "12") { //관광지
