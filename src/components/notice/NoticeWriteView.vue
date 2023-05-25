@@ -9,19 +9,15 @@
 
             <div class="mb-3">
 				<label for="title" class="form-label">제목</label> 
-				<!-- <input
-					type="text" class="form-control" id="title" name="title"
-					placeholder="제목..." v-model="freeboard.freeBoardTitle"/> -->
 
                     <input
 					type="text" class="form-control" id="title" name="title"
-					placeholder="제목..."/>
+					placeholder="제목..." v-model="notice.noticeTitle"/>
 			</div>
             
 			<div class="mb-3">
 				<label for="content" class="form-label">내용</label>
-				<!-- <textarea class="form-control" id="content" name="content" rows="7" placeholder="내용 입력..." v-model="freeboard.freeBoardContent"></textarea> -->
-				<textarea class="form-control" id="content" name="content" rows="7" placeholder="내용 입력..."></textarea>
+				<textarea class="form-control" id="content" name="content" rows="7" placeholder="내용 입력..." v-model="notice.noticeContent"></textarea>
 			</div>
             
 			<div class="col-auto text-center">
@@ -34,16 +30,40 @@
 </template>
 
 <script>
+import http from "@/api/http";
+import { mapState } from "vuex";
+const userStore = "userStore";
+
 export default {
+    
     name: 'NoticeWrite',
     components: {},
     data() {
         return {
             message: '',
+            notice: {
+                userNo: "",
+                noticeTitle: "",
+                noticeContent: "",
+            },
         };
     },
-    created() {},
-    methods: {},
+    created() {
+        console.log(">>" + this.userInfo)
+    },
+    methods: {
+        writeNoticeBoard() {
+            this.notice.userNo = this.userInfo.userNo
+            
+            // console.log(this.notice.userNo)
+            http.post(`/notice`, this.notice);
+            alert("공지사항이 등록되었습니다.")
+            this.$router.push("/notice/list")
+        }  
+    },
+    computed: {
+		...mapState(userStore, ["userInfo"]),
+  },
 };
 </script>
 

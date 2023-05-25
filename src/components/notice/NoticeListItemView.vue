@@ -6,7 +6,7 @@
                 {{ notice.noticeTitle }}
             </router-link>
         </td>
-        <td>{{ notice.userNo }}</td>
+        <td>관리자</td>
         <td>{{ notice.noticeHit }}</td>
         <td>{{ notice.noticeCreate }}</td>
     </tr>

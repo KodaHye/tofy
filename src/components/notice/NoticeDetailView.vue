@@ -35,12 +35,12 @@
                                 </div>
 
                                 <div style="padding-right: 3px;">
-                                    <b-button size="sm" variant="primary"
+                                    <b-button size="sm" variant="primary" v-if="this.userInfo.adminFl == 'Y'"
                                         @click="$router.push({ name: 'noticeModify', params: { noticeno: notice.noticeNo } })">글수정</b-button>
                                 </div>
 
                                 <div style="margin-right: 30px;">
-                                    <b-button size="sm" variant="danger"
+                                    <b-button size="sm" variant="danger" v-if="this.userInfo.adminFl == 'Y'"
                                         @click="$router.push({ name: 'noticeDelete', params: { notice: notice.noticeNo } })">글삭제</b-button>
                                 </div>
                             </div>
@@ -55,6 +55,8 @@
 <script>
 
 import http from "@/api/http";
+import { mapState } from "vuex";
+const userStore = "userStore";
 
 export default {
     name: 'NoticeDetail',
@@ -70,6 +72,9 @@ export default {
             this.notice = data,
                 console.log(data)
         })
+    },
+    computed: {
+        ...mapState(userStore, ["userInfo"]),
     },
     methods: {},
 };
