@@ -1,22 +1,28 @@
 <template>
     <div class="box">
-        <div class="content">
-            <div style="margin: 20px 25px 30px 25px;">
+        <div class="content" style="padding-bottom: 5px;">
+            <div style="margin: 20px 25px 5px 25px;">
                 <div style="padding-bottom: 15px;">
                     <h1>여행계획 상세 페이지</h1>
                 </div>
-                <div style="font-size: 15pt;"><span style="font-weight: bold; ">' {{ this.plan.user.userNm }} ' 님</span> 이
-                    만든 여행계획입니다.</div>
-            </div>
 
+                <div class="row">
+                    <div style="font-size: 15pt;" class="col-8">
+                        <span style="font-weight: bold; ">' {{ this.plan.user.userNm }} ' 님</span>
+                        이 만든 여행계획입니다.
+                    </div>
+
+                    <div class="col-4" style="text-align: right;">
+                        작성일자: {{ this.plan.planCreate }}
+                    </div>
+                </div>
+            </div>
+            <hr>
 
             <div class="row" style="margin: 20px 15px 30px 15px;">
                 <div class="col-8">
                     <span style="font-weight: bold; margin-right: 10px; font-size: 15pt;">
                         여행계획 제목 | </span> {{ this.plan.planTitle }}
-                </div>
-                <div class="col-4" style="text-align: right;">
-                    작성일자: {{ this.plan.planCreate }}
                 </div>
             </div>
 
@@ -38,7 +44,8 @@
                         <!-- 카드 내용을 추가하세요 -->
                         <div class="card" style="height: 200px;">
                             <div style="width: 100%; height: 60%; padding-bottom: 10px;" class="image-box">
-                                <img v-if="card.firstImage" :src="card.attractionDto.firstImage" alt="카드 이미지" class="image-thumbnail" />
+                                <img v-if="card.firstImage" :src="card.attractionDto.firstImage" alt="카드 이미지"
+                                    class="image-thumbnail" />
                                 <div v-else class="image-thumbnail"
                                     style="display: flex; justify-content: center; align-items: center;">
                                     <img src="@/assets/img/no_image.jpg" style="max-width: 100%; max-height: 100%;" />
@@ -72,23 +79,24 @@
                 <div style="margin-top: 3px;">{{ this.plan.planContent }}</div>
             </div>
 
+            <hr>
             <div class="row align-self-center mb-2" style="display: flex; align-items: baseline;">
                 <div class="col-md-5"></div>
                 <div class="col-md-7">
                     <div class="row" style="float: right;">
                         <div class="row">
                             <div style="padding-right: 3px;">
-                                <b-button size="sm" @click="$router.push({ name: 'freeboardList' })">글목록</b-button>
+                                <b-button size="sm" @click="$router.push({ name: 'planList' })">여행계획 목록</b-button>
                             </div>
 
                             <div style="padding-right: 3px;">
                                 <b-button size="sm" variant="primary"
-                                    @click="$router.push({ name: 'freeboardModify', params: { boardno: board.freeBoardNo } })">글수정</b-button>
+                                    @click="$router.push({ name: 'planModify', params: { boardno: this.$route.params.boardno } })">글수정</b-button>
                             </div>
 
                             <div style="margin-right: 30px;">
                                 <b-button size="sm" variant="danger"
-                                    @click="$router.push({ name: 'freeboardDelete', params: { boardno: board.freeBoardNo } })">글삭제</b-button>
+                                    @click="$router.push({ name: 'planDelete', params: { boardno: this.$route.params.boardno } })">글삭제</b-button>
                             </div>
                         </div>
                     </div>
@@ -123,8 +131,8 @@ export default {
             this.card = data.planDetail;
             // this.card.length 만큼 반복문
             // planDetail에 push하기
-            console.log(data.planDetail.length)
-            console.log(this.card)
+            // console.log(data.planDetail.length)
+            // console.log(this.card)
 
             for (var i = 0; i < data.planDetail.length; i++) {
                 // http.get(`attraction/125266`)
@@ -132,9 +140,12 @@ export default {
                     this.planDetail.push(response.data);  // 결과를 planDetail에 추가
                 });
             }
-            console.log("planDetail")
-            console.log(this.planDetail)
+            // console.log("planDetail")
+            // console.log(this.planDetail)
+
         })
+
+        console.log(this.plan)
     },
     methods: {
 
@@ -196,4 +207,5 @@ export default {
 
 .card>p {
     margin: 0px;
-}</style>
+}
+</style>

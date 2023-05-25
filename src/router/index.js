@@ -133,9 +133,14 @@ const routes = [
         component: () => import("@/components/notice/NoticeListView"),
       },
       {
-        path: "write",
+        path: "write/:noticeno",
         name: "noticeWrite",
         component: () => import("@/components/notice/NoticeWriteView"),
+      },
+      {
+        path: "detail/:noticeno",
+        name: "noticeDetail",
+        component: () => import("@/components/notice/NoticeDetailView"),
       },
     ],
   },
