@@ -96,7 +96,7 @@
                             </div>
 
                             <div style="margin-right: 30px;">
-                                <b-button size="sm" variant="danger" 
+                                <b-button size="sm" variant="danger"  v-if="this.userInfo.userNo == this.plan.userNo" 
                                     @click="$router.push({ name: 'planDelete', params: { boardno: this.$route.params.boardno } })">글삭제</b-button>
                             </div>
                         </div>
