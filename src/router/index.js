@@ -14,7 +14,7 @@ const onlyAuthUser = async (to, from, next) => {
 
   if (checkUserInfo != null && token) {
     console.log("토큰 유효성 체크");
-    await store.dispatch("memberStore/getUserInfo", token);
+    await store.dispatch("userStore/getUserInfo", token);
   }
   if (!checkToken || checkUserInfo === null) {
     alert("로그인이 필요합니다.");

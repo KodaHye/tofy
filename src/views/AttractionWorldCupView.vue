@@ -119,12 +119,13 @@
                     </div>
                 </div>
                 <div v-else>
-                    <h2>Winner: {{ winner.title }}</h2>
+                    <h1>우승 !!!!!</h1>
                     <div v-if="isWinnerSelected">
                         <p>축하합니다! {{ winner.title }}을(를) 고르셨습니다!</p>
                         <div class="worldcup-content-card"
                             :style="{ 'background-image': `url(${winner.firstImage === '' ? require('/public/no_image.jpg') : winner.firstImage})` }" 
                             style="margin: auto;"
+                            @click="goToDetailView(winner.contentId)"
                         >
                             <div class="destination">{{ winner.title }}</div>
                             <div class="destination">{{ winner.addr }}</div>
@@ -138,7 +139,10 @@
 </template>
   
 <script>
-import { pickRandomAttractions } from '@/api/worldcup';
+import { mapState } from 'vuex';
+import { pickRandomAttractions, saveWorldCupResult} from '@/api/worldcup';
+
+const userStore = "userStore";
 
 export default {
     name: 'TravelWorldCup',
@@ -168,6 +172,33 @@ export default {
                 console.log(err);
             }
         )
+    },
+    computed: {
+        ...mapState(userStore, ["isLogin", "isLoginError", "userInfo"])
+    },
+    watch: {
+        isWinnerSelected() {
+            if (this.isWinnerSelected) {
+                const result = {
+                    contentId: this.winner.contentId,
+                    userNo: this.userInfo.userNo
+                }
+
+                console.log(result);
+
+                saveWorldCupResult (
+                    result,
+                    res => {
+                        if (res.data.status === "success") {
+                            console.log("월드컵 결과 저장 성공");
+                        }
+                    },
+                    err => {
+                        console.log("결과 저장 에러", err);
+                    }
+                )
+            }
+        }
     },
     methods: {
         fetchDestinations() {
@@ -229,6 +260,9 @@ export default {
             }
 
             return stack;
+        },
+        async goToDetailView(no) {
+            await this.$router.push(`/attraction/detail/${no}`);
         }
     }
 };

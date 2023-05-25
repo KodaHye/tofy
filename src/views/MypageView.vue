@@ -16,7 +16,7 @@
                 <!--컴포넌트 (개인정보, 태그 수정, 우승 여행지 목록)-->
                 <b-col style="height: 100%; overflow: auto;">
                     <b-row>
-                        <b-col style="font-size: 30px; text-align: center;">{{ selectName }}</b-col>
+                        <b-col style="font-size: 30px; text-align: center; overflow: scroll;">{{ selectName }}</b-col>
                         <div class="w-100" style="height: 30px;"></div>
                         <b-col>
                             <router-view></router-view>
