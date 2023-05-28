@@ -14,4 +14,8 @@ async function getUserTags(userNo, success, fail) {
     await tag.get(`/tag/${userNo}`).then(success).catch(fail);
 }
 
-export {getAllTags, saveSelectedTags, getUserTags};
+async function updateTags(params, success, fail) {
+    await tag.put('/tag', params).then(success).catch(fail);
+}
+
+export {getAllTags, saveSelectedTags, getUserTags, updateTags};
