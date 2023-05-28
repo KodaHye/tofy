@@ -10,7 +10,7 @@
             </div>
             <div class="row align-self-center mb-2">
                 <div class="col-md-2 text-start">
-                    <b-button variant="outline-primary"
+                    <b-button v-if="this.userInfo.adminFl == 'Y'" variant="outline-primary"
                         @click="$router.push({ name: 'noticeWrite' })">글쓰기</b-button>
                 </div>
                 <div class="col-md-3"></div>

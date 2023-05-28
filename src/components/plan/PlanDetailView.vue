@@ -91,12 +91,12 @@
                             </div>
 
                             <div style="padding-right: 3px;">
-                                <b-button size="sm" variant="primary"
+                                <b-button size="sm" variant="primary" v-if="this.userInfo.userNo == this.plan.userNo" 
                                     @click="$router.push({ name: 'planModify', params: { boardno: this.$route.params.boardno } })">글수정</b-button>
                             </div>
 
                             <div style="margin-right: 30px;">
-                                <b-button size="sm" variant="danger"
+                                <b-button size="sm" variant="danger"  v-if="this.userInfo.userNo == this.plan.userNo" 
                                     @click="$router.push({ name: 'planDelete', params: { boardno: this.$route.params.boardno } })">글삭제</b-button>
                             </div>
                         </div>
@@ -111,6 +111,8 @@
 <script>
 import http from "@/api/http";
 import { Carousel, Slide } from 'vue-carousel';
+import { mapState } from "vuex";
+const userStore = "userStore";
 
 export default {
     name: 'PlanWrite',
@@ -161,7 +163,10 @@ export default {
                 return `${year}-${month}-${day}`;
             }
         }
-    }
+    },
+    computed: {
+		...mapState(userStore, ["userInfo"]),
+    },
 };
 </script>
 

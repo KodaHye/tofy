@@ -57,6 +57,7 @@ export default {
             this.freeboard.userNo = this.userInfo.userNo
 
             http.post(`/freeboard`, this.freeboard);
+            alert("글이 작성되었습니다.")
             this.$router.push("/freeboard/list")
         }
     },

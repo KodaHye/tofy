@@ -1,6 +1,6 @@
 <template>
     <div class="box">
-        <div class="contentdetail">
+        <div class="contentAttrDetail">
             <div style="margin: 20px 0px 60px 0px;">
                 <h2 style="padding-bottom: 10px;">관광지 상세정보</h2>
 
@@ -68,6 +68,8 @@
                             style="box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;">
                             <!-- 카드 내용을 추가하세요 -->
                             <div class="card" style="height: 200px;">
+                        <!-- <div class="card" style="height: 200px;" @click="$router.push({ name: 'attractionDetail', params: { attrno: card.contentId }})"> -->
+                            
                                 <div style="width: 100%; height: 60%;" class="image-box">
                                     <img v-if="card.firstImage" :src="card.firstImage" alt="카드 이미지"
                                         class="image-thumbnail" />
@@ -76,7 +78,7 @@
                                         <img src="@/assets/img/no_image.jpg" style="max-width: 100%; max-height: 100%;" />
                                     </div>
                                 </div>
-                                <p>{{ card.title }}</p>
+                                <p><span>{{ card.title }}</span></p>
                                 <p>{{ card.addr }}</p>
                             </div>
                         </slide>
@@ -271,7 +273,7 @@ export default {
     object-fit: cover;
 }
 
-.contentdetail {
+.contentAttrDetail {
     min-height: 80;
     flex-grow: 1;
     margin: 0 auto;

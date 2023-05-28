@@ -16,9 +16,9 @@
     </div>
     <!--월드컵 하러가기 문구 end-->
     <!--로그인 시 사용자 기반 추천 여행지 보이기 start-->
-    <div class="section">
+    <div class="section" v-if="this.userInfo">
       <!--여기에 캐러셀 구현 예정-->
-      <div style="margin-right: 50px; margin-left: 50px; width: 100vw;" data-aos="fade-up" data-aos-duration="3000" data-aos-anchor-placement="bottom-bottom">
+      <div style="margin-right: 50px; margin-left: 50px; width: 85vw;" data-aos="fade-up" data-aos-duration="3000" data-aos-anchor-placement="bottom-bottom">
         <h3>당신이 선택한 태그를 선택한 사람들이</h3>
         <h3 style="margin-bottom: 10px;">많이 고른 여행지 입니다.</h3>
         <carousel ref="carousel" :perPage="5" :navigation-enabled="true"
@@ -57,7 +57,7 @@ export default {
     }
   },
   created() {
-    console.log(this.userInfo.userNo);
+    console.log(this.userInfo);
 
     http.get(`/recommendByTag/${this.userInfo.userNo}`)
     .then(({ data }) => {
