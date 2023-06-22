@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+  <!-- Class 적용을 위한 Alias -->
+  <typeAliases>
+	<typeAlias type="com.ssafy.tofy.freeboard.dto.FreeBoardDto" alias="freeBoardDto"/>
+	<typeAlias type="com.ssafy.tofy.freeboard.dto.FreeBoardCommentDto" alias="freeBoardCommentDto"/>
+    <typeAlias type="com.ssafy.tofy.user.dto.User" alias="user" />
+   	<typeAlias type="com.ssafy.tofy.tag.dto.Tag" alias="tag"/>
+	<typeAlias type="com.ssafy.tofy.tag.dto.SelectTag" alias="selectTag"/>
+	<typeAlias type="com.ssafy.tofy.notice.dto.NoticeDto" alias="noticeDto"/>
+    <typeAlias type="com.ssafy.tofy.worldcup.dto.WorldCupResult" alias="worldcup"/>
+	<typeAlias type="com.ssafy.tofy.attraction.dto.AttractionDto" alias="attractionDto"/>
+	<typeAlias type="com.ssafy.tofy.attraction.dto.AttractionDescDto" alias="attractionDescDto"/>
+	<typeAlias type="com.ssafy.tofy.attraction.dto.Sido" alias="sido"/>
+	<typeAlias type="com.ssafy.tofy.attraction.dto.Gugun" alias="gugun"/>
+	<typeAlias type="com.ssafy.tofy.attraction.dto.AttractionReviewDto" alias="attractionReviewDto"/>
+	<typeAlias type="com.ssafy.tofy.attraction.dto.AttractionDescDto" alias="attractionDescDto"/>
+	<typeAlias type="com.ssafy.tofy.plan.dto.PlanDetail" alias = "planDetail"/>
+	<typeAlias type="com.ssafy.tofy.plan.dto.Plan" alias = "plan"/>
+	<typeAlias type="com.ssafy.tofy.attraction.dto.AttractionRate" alias = "attrRate"/>
+
+  </typeAliases>
+  
+  <!-- Mapper 파일 경로 설정  -->
+  <mappers>
+	<mapper resource="mapper/freeboard.xml"/>
+    <mapper resource="mapper/user.xml"/>
+	<mapper resource="mapper/notice.xml"/>
+    <mapper resource="mapper/worldcup.xml"/>
+	<mapper resource="mapper/attraction.xml"/>
+	<mapper resource="mapper/recommend.xml"/>
+  	<mapper resource="mapper/tag.xml" />
+  	<mapper resource="mapper/plan.xml"/>
+  </mappers>
+
+</configuration>

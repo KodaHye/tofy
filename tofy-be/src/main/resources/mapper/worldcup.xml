@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.tofy.worldcup.repository.WorldCupRepository">
+	<resultMap type="worldcup" id="worldcupMap">
+        <result column="worldcup_no" property="worldCupNo"/>
+        <result column="user_no" property="userNo"/>
+        <result column="content_id" property="contentId"/>
+        <result column="worldcup_create" property="worldCupCreate"/>
+    </resultMap>
+    
+    <select id="pickRandomAttractions" resultType="attractionDto">
+        select * from attraction_info
+        where content_type_id = 12
+        and length(first_image) > 0
+        order by rand()
+        limit 16
+    </select>
+    <select id="pickWorldCupResultsByUserNo" parameterType="String" resultMap="worldcupMap">
+        select * from trip_worldcup where user_no = #{userNo}
+    </select>
+    <insert id="saveWorldCupResult" parameterType="worldcup">
+        insert into trip_worldcup (user_no, content_id)
+        values (#{userNo}, #{contentId})
+    </insert>
+    <update id="increaseWinCntByTag" parameterType="map">
+        update win_cnt_by_tag
+        set count = count + 1
+        where content_id = #{contentId} and tag_no in
+        <foreach item="tag" index="index" collection="tags" open="(" separator="," close=")">
+            #{tag.tagNo}
+        </foreach>
+    </update>
+    <delete id="deleteSelectedWorldCup" parameterType="map">
+        delete from trip_worldcup
+        where worldcup_no in
+        <foreach collection="array" item="item" open="(" close=")" separator=",">
+            #{item.worldCupNo}
+        </foreach>
+    </delete>
+    <delete id="deleteWorldCupByUserNo" parameterType="String">
+        delete from trip_worldcup where user_no = #{userNo}
+    </delete>
+
+</mapper>
