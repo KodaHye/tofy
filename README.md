@@ -110,7 +110,7 @@
 
 | FrontEnd      | BackEnd               | 협업툴  |
 | ------------- | --------------------- | ------- |
-| Vue3          | Java Open-JDK zulu 8, | GitLab  |
+| Vue3          | Java Open-JDK zulu 8  | GitLab  |
 | Vuex          | SpringBoot            | Notion  |
 | axios         | Maven                 | Postman |
 | Bootstrap-Vue | Lombok                | figma   |
