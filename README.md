@@ -121,4 +121,4 @@
 
 ## 4. 프로젝트 산출물
 
-https://www.notion.so/tofy-ca90e75527cb4724bfc6a5cb7b3f327c?pvs=4
+[https://www.notion.so/tofy-ca90e75527cb4724bfc6a5cb7b3f327c?pvs=4](https://brawny-trumpet-e54.notion.site/tofy-ca90e75527cb4724bfc6a5cb7b3f327c?pvs=4)https://brawny-trumpet-e54.notion.site/tofy-ca90e75527cb4724bfc6a5cb7b3f327c?pvs=4
